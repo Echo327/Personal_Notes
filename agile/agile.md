@@ -289,6 +289,82 @@ Recognise that software is developed by people
 Offer developers what they expect: saftey, accomplishment, belonging, growth, intimacy
 
 ## Roles
+### Traditional Manager Roles
+* Define goals
+* Define deadlines
+* Assign tasks
+* Provide interface with higher management
+* Provide interface with customer
+* Validate requirements
+* Decide whether goals have been met
+* Enfor deadlines
+* Coach, mentor
+* Enforce rules and methodology
+* (...)
+
+> A manager can be a software professional, but also not, for example someone with an MBA and no software knowledge
+
+### The 3 SCRUM Roles
+1. (self-organising) team
+*group of 7 +/- 2 members*
+The team:
+* is cross-functional *(one person does not own a whole area, anyone can take on any task)*
+* selects iteration(/sprint) goal and work results
+* organizes itself and its work
+* can do everything within guideline to reach goal
+*  demos work results to product owner
+
+> scrums of scrums for bigger projects that need more members
+
+**core participants and fellow travelers**
+Core participants are committed to the project; fellow travelers are involved in the project. Fellow travelers stand on the side in discussions and give their opinion if invited to do so.
+This is done so meetings are kept focused.
+
+2. Product Owner
+*person*
+* defines product features
+* decides on release date
+* decides on release content
+* responsible for product profitability (ROI)
+* prioritises features according to market value
+* can change features and priority over 30 days
+* accepts or rejects work results
+
+> is not in charge of individual small sprints
+
+3. Scrum Master
+*person*
+* ensures that the team is functional and productive
+* enables cooperation across all roles and functions
+* shields team from external interferences
+* enforces process: daily meeting, planning and review meetings
+* **removes impediments**
+* normally, does no development
+
+> **Impediment**
+> Anything that affects the velocity (progress) of the team. [Lean]
+>
+> Examples:
+> * Hardware limitations
+> * Missing requirements
+> * Missing supporting software (wheter from within or outside of the team)
+> * Management interference
+> * Bureaucratic delays
+
+*A SCRUM Master can be in several projects if they have the time to if they do not develop.*
+
+**Managers in Agile (if any)**
+Agile Managers:
+* support team in its use of SCRUM
+* contribute wisdom, expertise, and assistance
+* Do not "play nanny":
+  Assign tasks, get status reports, and other forms of micromanagement
+* instead, "play guru":
+  Mentor, coach, devil's advocate, help remove impediments, and solve problems
+* may need to evolve their management style, *e.g.* use Socratic questioning to help team discover solutions (rather than imposing a solution)
+
+### Other Agile roles
+
 
 ## Practices
 
