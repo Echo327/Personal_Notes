@@ -192,7 +192,8 @@ Alternatively:
 
 7. Treat tests as a key resource:
     - Do not start any new development until all tests pass
-    *concept of Regression test suite*
+    Regression test suite: A collection of tests including tests that failed in the history of the project, to make sure that faults that already occured in the past do not occur again when implementing new features
+
     It is forbidden to start adding new functionality until we are sure that all existing tests pass; all the existing functionality is reasonable well-implemented as guaranteed (or at least supported).
 
     *in some cases, some tests might be considered currently non essential and might not require passing testing before moving on* 
@@ -220,7 +221,72 @@ Alternatively:
     *There are many ways to accomplish something, hence the need for abstraction in user stories. For example, 2*2 = 4, 3*3=9 or 2^2 = 4 3^2 = 9 , but also 2+1^1+0 = 4 or 3+2^2+1 = 9.*
 
 ### Method-Specific Principles
+* **Everything not adding value to the customer is considered waste** [Lean]
+This includes: unnecessary code, unnecessary functionality, delay in progress, unclear requirements, insufficient testing, avoidable process repetition, bureaucracy, slow internal communication, partially done coding, waiting for other activities/team/processes, defects/lower quality, managerial overhead, ...
 
+*Value stream mapping: strategy to recognize waste. Eliminate it iteratively*
+
+* **Amplify learning** [Lean]
+  * Run tests as soon as the code is written to prevent accumulation of defects
+  * Try different ideas by writing, testing code, and building instead of added documentation or planning
+  * Get user input, for example by providing screenshots of the product in development or setting up feedback sessions with customers
+  * Enforce short iteration cycles, each including refactoring and integration testing. This maintains a steady supply of feedback as we go
+
+> Multiple design approach [Lean]: assigning the sale problem to different teams, in parallel (*comment: and this is not wasteful!?*)
+
+* **Decide as late as possible** [Lean]
+  * Keep decisions pending until they can be made on facts (customer needs/feedback) instead of assuming, as much as possible
+  * The more complex a system is, the more if can be able to adapt and change to need
+  * Use iterative approaches to adapt to changes and correct mistakes. This reduces cost quite a bit by avoiding to have to correct mistakes after release
+  * Planning should be used to concentrate on different options, adapting to the current situation, and clearing up confusions by establishing patterns so they can be adressed quickly and effectively
+
+* **Focus** [Crystal]
+In order to ensure continuous progress, focus on an individual task instead of getting scattered amongst multiple tasks.
+Avoid interruptions as much as possible when focusing on one task.
+Avoid switching projects or (big?) tasks too rapidly (at least 2 days before switching) 
+
+Clearly define and prioritise goals so the project can advance in the asme direction smoothly
+
+* **Deliver as fast as possible** [Lean, SCRUM]
+> It is not the biggest that survives, but the fastest. [Poppendieck]
+
+The sooner the end product is delivered, the quicker feed back is received and incorporated in the next iteration.
+For software, the Just-In-Time production ideology means presenting the needed result and letting the team organise itself to obtain it in a specific iteration.
+
+> This is not always true, for example VisiCalc opened up the market for spreadsheets only to get dwarfed by bigger companies right after.
+
+* **Minimise dependencies** [SCRUM]
+"Scrum asserts that it is possible to remove dependencies between user stories, so that at any point any user story can be selected from a queue according to the proper criteria (maximising business value)"
+
+*In reality, the complexity of a software can easily make it such that the various features are so intricately intertwined that it's difficult to remove anything without everything else crumbling down*
+
+* **Adding features** [*Zave*]
+"
+In telecommunication software, feature interactions are a notorious source of runaway complexity, bugs, cost and schedule overruns, and unfortunate user experiences.
+
+Bob has "call-forwarding" enabled and is forwarding calls to Carol. Carol has "do-not-disturb".
+Alice calls Bob, the call is forwarded to Carol, and Carol's phone rings because "do-not-disturb" is not applied to a forwarded call.
+
+Alice calls a sales group. A feature for the sales group selects Bob as a sales representative on duty, and forwards the call to Bob. Bob's cellphone is off, so his personal Voice Mail answers the call and offers to take a message.
+
+(...more examples...)
+"
+
+**Imagined User Stories** [Bertrand Meyer, ETHx course on EDX] corresponding to previous example:
+> As an executive, I want a redirection option so that is my hpone is busy the call is redirected to my secretary  
+> As a systems configurator, I want to be able to specify various priorities for "busy" actions  
+> As a salesperson, I want to make sure that is a prospect calls while I am in a conversation, the conversation is interrupted so that I can take the call immediately  
+> As a considerate correspondent, I want to make sure that if a call comes while my phone is busy I get to the option of calling back as soon as the current call is over
+
+* **Personal Safety** [Crystal]
+  * Encourage free expression of ideas
+  * Do not ridicule anyone because of a question or suggestion
+  * Build trust within the team
+
+* **Humanity** [XP]
+Recognise that software is developed by people
+
+Offer developers what they expect: saftey, accomplishment, belonging, growth, intimacy
 
 ## Roles
 
