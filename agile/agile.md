@@ -26,8 +26,8 @@ Drawbacks/Inconveniences:
 **Agile** adresses the above problems while also rejecting the problem-prone upfront requirements phase (**requirements change** over time; so the time spent **formalising** requirements should be minimised). This also reduces waste (Lean) because of requirements not being met. **Agile replaces requirements with user stories.**
 
 Some concrete examples of how agile methodologies address these issues:
-> Beck (XP): Requirements gathering is an activity that provides details just before it is needed in development.
-> Cohn (SCRUM): All work occurs within the repeated cycle of sprints with the absence of upfront analysis or design phase.
+> Beck (XP): Requirements gathering is an activity that provides details just before it is needed in development.  
+> Cohn (SCRUM): All work occurs within the repeated cycle of sprints with the absence of upfront analysis or design phase.  
 > Poppendieck (Lean): Requirements should be more aptly called candidate solutions and not set in stone. "separating requirements from implementation is just another form of handover" 
 
 ## Manifesto (2001)
