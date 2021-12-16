@@ -493,17 +493,360 @@ Incomplete work cannot be demonstrated
 > Iterations help with this by providing feedback on whether or not the current process is working  
 
 ### Development
+```
+* Pair Programming [XP]
+*best known, controversial (Kent Beck, originator of XP said this should be default)*
+*not desirable as sole technique for developping software*
 
+Two programmers sitting at one machine; thinking out loud
+Goals:
+  * Make thinking process explicit
+  * Keep each other on task
+  * Brainstorm refinements to system
+  * Clarify ideas
+  * Take initiative when other stuck, lowering frustration
+  * Hold each other accountable to team practices
+
+*everything is explicit, discussed, explained before being entered into code; sometimes just trying to explain points out inconsistencies or problems that could arise*
+
+*studies have shown that pair programming results in the same amount of productivity and quality as traditional quality-oriented techniques like code review; however pair programming still shines in tricky cases*
+
+> Pair programming is not mentoring. The pair should be at approximately equal levels of competence.
+
+* Single code base [XP]
+Maintain a single code base: avoid branching (even if permitted by configuration management system)
+
+* Shared code [XP]
+Code responsibility is shared by entire team, no one person owns any piece of code. Permission to change code should be available to everyone on the same team/project.
+
+Rationale:
+  * most non-trivial features extend across many layers in the application
+  * code ownership creates unnecessary dependencies between team members and delays
+  * what counts is implemented features, not personal responsibility
+  * avoid blame game
+  * avoid specialisation
+  * minimise risk (team members leaving)
+
+* Leave optimisation till last [XP]
+Wait until you have finished a story and run your tests so you have a working code before trying to optimise the code
+
+Only by having a working code can you know what needs to be optimised
+
+Trying to anticipate problems before they exist is wasteful
+
+* Simple design [XP]
+Produce the simplest design that works
+
+Refactor (improve design efforts) as needed
+
+* Incremental design [XP]
+Developers work in small steps, validating each before moving to the next
+
+Three parts:
+  * Start by creating the simplest design that could possibly work
+  * Incrementally add to it as the needs of the software evolve
+  * Continuously improve design by reflecting on its strengths and weaknesses
+
+> "When you first create a design element, be completely specific. Create a simple design that solves only the problem you face, no matter how easy it may seem to solve more general problems."
+
+> "The ability to think in abstractions is often a sign of a good programmer. Coding for one specific scenario will seem strange, even unprofessional. Waiting to create abstractions will enable you to create designs that are simple and powerful. Do it anyway."
+
+*abstraction and weeding out problems before they even arise are skills a good engineer should have, "take" this design with caution*
+
+* System Metaphor [XP]
+"A metaphor is meant to be agreed upon by all members of a project as a means of simply explaining the purpose of the project and thus guide the structure of the architecture"
+
+Benefits:
+  * Communication, including between customers and developers
+  * Clarify project, explain functionality
+  * Favors simple design
+  * Helps find common vocabulary
+
+* Refactoring (XP)
+"Disciplined technique for restructuring an existing body of code, altering its internal structure without changing its external behaviour"
+
+Examples:
+  * Encapsulate attribute (field) into function
+  * Replace conditional with more object-oriented technique of polymorphism and dynamic binding
+  * Extract routine (method), *i.e.* remove duplication where possible
+  * Rename routine or attribute
+  * Move routine or attribute to another class
+  * Pull up, pull down in the inheritance hierarchy
+
+used in agile methods as a substitute for upfront design
+```
 
 ### Release 
+```
 Early and often
+Agile encourages frequent integration, deployment, release
+
+**Only one pair integrates code at a time** [XP]
+collective code ownership; development proceeds in parallel
+
+but: to avoid conflicts, only one pair is permitted to integrate its change at any given time
+
+**Continuous integration** [XP]
+the combination of frequent releases with relentless testing
+
+keep system fully integrated at all times
+
+rather than weekly or daily builds, build system several times per day
+benefits:
+* integration is easier because little has changed
+* team learns more quickly
+* unexpected interactions rooted out early: conflicts are found while team can still change approach
+* problematic code more likely to be fixed because more eyes see it sooner
+* duplication easier to eliminate because visible sooner
+
+> *release early and often*  
+> follows from rejection of "Big Upfront Design"  
+> Avoid long architectural phases  
+> Refactor
+
+**small releases** [XP]
+XP teams practice small releases in 2 important ways:
+* release running, tested software, delivering business value chosen by the Customer, every iteration. The Customer can use this software for any purpose, whether evaluation or even release to end users
+* release to end users frequently as well. Web projects release as often as daily, in house projects monthly or more frequently. Ven shrink-wrapped products are shipped as often as quarterly.
+
+**Incremental deployment** [XP, SCRUM]
+deploy functionality gradually
+
+"Big Bang" deployment is risky
+
+*not always applicable, for example, to release the Euro all ATMs had to be ready for it from Day One*
+
+**daily deployment** [XP]
+goes back to Microsoft's Daily Build
+"China Shop Rules": you break it, you fix it (the dev who made the code, has to fix the code themselves)
+
+difficult to reconcile with other XP principle
+
+**Ten-minute build** [XP]
+"Make sure that the build can be completed, through an automatic script, in ten minutes or less, to allow frequent integration. Includes:
+* compile source code
+* run tests
+* configure registry settings
+* initialize database schemas
+* set up web servers
+* launch processes
+* build installers
+* deploy
+Make sure the build provides a clear indication of success or failure"
+
+"If it has to take more than ten minutes, split the project into subprojects, and replace end-to-end functional tests by unit tests"
+
+**Weekly cycle** [XP]
+Plan work a week at a time. Have a meeting at the beginning of every week:
+1. review progress, including how acutla progress for the previous week matched expected progress
+2. have customers pick a wekk's worth of stories to implement this week
+3. break the stories into tasks
+
+Start week by writing automated tests that will run when the stories are completed. Spend rest completing stories and getting tests to pass. The goal is to have deployable software at the end of the week.
+
+The nice thing about a week is that everyone is focused on having the tests run on Friday. If you get to Wednesday and it is clear that all the tests won't be running, you still have time to choose the most valuable stories and complete them.
+
+```
 
 ### Testing and Quality
 
+```
+**Coding standards** [XP]
+project members all code to the same conventions
+
+**All codes must have unit tests** [XP]
+*widely adopted*
+Core idea of XP:
+"Do not write code without associate unit tests"
+
+**all code must pass unit tests before moving on** [XP]
+code that does not pass tests is waste
+
+Do not proceed to next step, *e.g.* next user story or next release, until all tests pass
+
+*if a test is not important, it's better to remove it and the corresponding functionality*
+
+**Test-First Development** [XP]
+Write tests before code
+
+The test replaces the specification
+
+**Code the unit test first** [XP]
+"Here is a really good way to develop new functionality:
+1. Find out what you have to do.
+2. Write a UnitTest for the desired new capability. Pick the smallest increment of new capability you can think of.
+3. Run the UnitTest. If it succeeds, you're done; go to step 1, or if you are completely finished, go home.
+4. Fix the immediate problem: maybe it's the fact that you didn't write the new method yet. Maybe the method doesn't quite work. Fix whatever it is. Go to Step 3.
+**A key aspect of this process: don't try to implement two things at a time, don't try to fix two things at a time. Just do one.**
+When you get this right, development turns into a very pleasant cycle of testing, seeing a simple thing to fix, fixing it, testing, getting positive feedback all the way. Guaranteed flow. And you go so fast!
+
+Try it, you'll like it."
+
+this can be generalised in:
+**Test-Driven Development**
+Standard cycle:
+* Add a test
+* Run all tests and see if the new one fails
+* Write some code
+* Run the automated tests and see them succeed
+* refactor code
+Expected benefits:
+* catch bugs early
+* write more tests
+* drive the design of the program
+* replace specifications by tests
+* use debugger less
+* more modular code
+* better coverage
+* improve overall productivity
+
+The basic idea is sound... ... but not the replacement of specifications by test
+
+Major benefit: keep an up-to-date collection of regression tests
+
+Requirement that all tests pass can be unrealistic (tests degrade, a non-passing test can be a problem with the test and not with the software)
+
+Basic TDD idea can be applied with specifications! See Contract-Driven Development
+
+**when bug found, create test before fixing it** [XP]
+> "A bug is not an error in logic, it is a test you forgot to write"
+
+**Root-cause analysis** [XP, SCRUM]
+
+When finding a defect, do not just fix it but analyse cause and make sure to correct that cause, not just the symptom
+
+this makes sure it doesn't happen again
+
+**Run acceptance tests often and puclish results** [XP]
+
+Acceptance tests are black box system tests. Each acceptance test represents some expected result from the system
+
+Automate them so they can be run often
+
+Publish acceptance test score to the team so everyone knows what is going on
+```
 
 ### Management (and others)
+```
+**Scrum of scrums** [SCRUM]
+*to address beyond 7 +/2 teams*
+Each day after daily scrum
+CLuster of teams discuss areas of overlap and integration
+A designated person from each team attends
+Agenda as Daily Scrum, plus the following four questions:
+* What has your team done since we last met?
+* What will your team do before we meet again?
+* Is anything slowing your team down?
+* Are you about to put something in another team's way? (anticipate impediments)
 
+**Whole team** [XP, SCRUM]
+All contributors sit together as members of one team:
+* includes a business representative who rpovides requirements, sets priorities and steers the project
+* included programmers
+* may include testers
+* may include analysts, helping to define requirements
+* often includes a coach
+* may include a manager
+None of these roles is the exclusive property of just one individual. The best teams have no specialists, only general contributors with special skills
+
+*this is to have various stakeholder categories in the same place: devs, customers, ...
+
+**Planning poker** [SCRUM]
+* present individual stories for estimation
+* discuss
+* Deck has successive numbers (quasi-Fibonacci)
+* Each participant chooses estimate from his deck
+* Keep estimates private until everyone has chosen a card
+* reveal estimates
+* repeat until consensus
+
+(Variant of Wideband Delphi technique.)
+
+*loud talkers might "_impose_" their estimate...influencing others; not the best option, but necessary*
+
+**Open workspace** [XP, Crystal]
+Workspace:
+* organised around pairing stations
+* with whiteboard space
+* locating people according to conversations they should overhear
+* with room for personal effects
+* with a place for private conversations
+
+expected benefits: improve communication, resolve problems quickly with the benefits of face-to-face interaction (as opposed to e.g. email)
+
+*good idea to use with XP, especially if lots of whiteboard space*
+
+*not best, some code better with less communication*
+
+**osmotic communication** [Crystal]
+
+Team is together in a room and listen to each other
+Information to flow around it
+Developer must break concentration if necessary
+Information flows quickly throughout team
+Questions answered rapidly
+All team updated on what is happening
+Reduce need for email and other non-direct communication
+Facilitate taking over of others' tasks
+
+**informative workspace** [XP, SCRUM]
+Facilitate communication through well-organised workspace:
+* story board with user story cards movable from not started to in progress to done column
+* release charts
+* iteration burndown charts
+* automated indicators showing the status of the latest unit-testing run
+* meeting room with visible charts, whiteboards and flipcharts
+
+*seeing the progress made or being made helps with motivation*
+
+**technical environment** [Crystal]
+*give devs the tools that they need, don't skimp on things like memory, give them the tools they need to be effective in software development*
+access to automated test, configuration management, frequent integration, code repository
+
+**team continuity** [XP]
+keep the team together and stable
+
+do not reassign people to other teas or treat them as mere resources
+
+**shrinking teams** [XP]
+*controversial*
+as a team grows in capability, keep its workload constant but gradually reduce its size
+this frees people to form more teams
+when the team has too few members, merge it with another too-small team
+*not very practical*
+
+**code and tests** [XP]
+Maintain only code and tests as permanent artifacts
+*somewhat extreme*
+
+**Customer always available** [XP]
+*embedded customer*
+All project phases require communication with customer, preferably face to face. Assign one or more customers to the development team who:
+* help write user stories to allow time estimates & assign priority
+* help make sure most of the desired functionality is covered by stories
+* during planning meeting, negotiate selection of user stories for release
+* negotiate release timing
+* make decisions that affect their business goals
+* try system early to provide feedback
+* (etc.)
+
+"This may seem like a lot of the customer's time but the customer's time is saved initially by not requiring a detailed requirelents specification and later by not delivering an uncooperative system"
+
+**Slack** [XP]
+"in any plan, include some minor tasks that can be dropped if you get behind."
+
+goals:
+* establish trust in the team's ability to deliver
+* reduce waste
+
+*not many companies apply this*
+
+*in general, don't plan too tight, don't plan every second of your workday, leave some room*
+
+```
 
 ## Artifacts
+
+
 
  
