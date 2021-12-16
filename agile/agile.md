@@ -451,6 +451,59 @@ The coach:
 
 ## Practices
 
+### Meetings
+*model were created for classical teams, could be adapted to distributed teams with modern forms of work (teleworking for example)*
+
+Specific regular "ritual" meetings
+* Daily Meeting (most important)
+Short (usually 15 minutes), held every working day, should be one of the first things in the work day.
+Precise and to-the-point, defines commitments and identify/uncover impediments ("deep" resolutions take place outside of this meeting)
+Committed members:
+  * What did you do yesterday?
+  * What will you do today?
+  * Are there any impediments in your way?
+
+* Planning Meeting
+Done at the beggining of every sprint (individual iteration)
+Goal: define work for the sprint.
+Outcome: Sprint Backlog, with time estimate for every task
+
+8-hour time limit (typically one work day):
+1st half: product owner + team: prioritize product backlog
+2nd half: team only: plan for Sprint, producing sprint backlog
+
+* Retrospective Meeting
+*Internal team meeting*
+To reflect on past sprint in order to make continuous process improvements
+  * What went well?
+  * What could be improved?
+
+3-hour time limit
+
+* Review Meeting
+To review completed and incomplete work
+
+Present and demo completed work to stakeholders
+Incomplete work cannot be demonstrated
+
+4-hour time limit
+
+> Reflective improvement (Crystal)  
+> Developers must take breaks from regular development to look for ways to improve the process  
+> Iterations help with this by providing feedback on whether or not the current process is working  
+
+### Development
+
+
+### Release 
+Early and often
+
+### Testing and Quality
+
+
+### Management (and others)
+
+
 ## Artifacts
 
  
