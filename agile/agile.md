@@ -93,6 +93,25 @@ Testing makes for better quality products.
 
 ## Updated Principles
 
+Over the years, this has given rise to multiple agile methodologies and the corresponding update to the agile principles to adress issues or fill in the gaps.
+
+### Agile Methods/Methodologies
+Some of the most popular agile methods are:
+
+*  Extreme Programming (**XP**)
+Response to UML (Unified Modelling Language) and CMMI (Capability Maturity Model Integration) etc. that emphasize process and documentation; but **what matters is the program and programming**
+
+*  **Lean** Software
+Made for engineering fields, especially the car industry. **Get rid of waste** (ex. useless documentation, ...); **concentrate on what is delivered to customer**
+
+*  **Crystal** Methodology
+Set of methods with various degrees of importance to process
+
+*  **SCRUM** (most widely adopted)
+Management method emphasizing ideas via **self-organising teams** (compared to closely managed one) and short release interations (**Sprints**)
+
+*  (...)
+
 ### Organisational Principles
 *mostly from SCRUM, some from XP*
 
@@ -433,20 +452,5 @@ The coach:
 ## Practices
 
 ## Artifacts
-
-## Agile Methods/Methodologies
-*  Extreme Programming (**XP**)
-Response to UML (Unified Modelling Language) and CMMI (Capability Maturity Model Integration) etc. that emphasize process and documentation; but **what matters is the program and programming**
-
-*  **Lean** Software
-Made for engineering fields, especially the car industry. **Get rid of waste** (ex. useless documentation, ...); **concentrate on what is delivered to customer**
-
-*  **Crystal** Methodology
-Set of methods with various degrees of importance to process
-
-*  **SCRUM** (most widely adopted)
-Management method emphasizing ideas via **self-organising teams** (compared to closely managed one) and short release interations (**Sprints**)
-
-*  (...)
 
  
