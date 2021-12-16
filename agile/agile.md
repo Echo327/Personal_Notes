@@ -2,24 +2,26 @@
 
 ## How and Why
 
-### Waterfall _Model_
-* Royce 1970
-> System Requirements -\>/<- Software Requirements -\>/<- Analysis -\>/<- Program Design -\>/<- Coding -\>/<- Testing -\>/<- Operations
+### Waterfall **Model**
+* Royce (1970)
+>      System       -->     Software     -->   Analysis   -->   Program   -->   Coding   -->   Testing   -->   Operations
+>   Requirements    <--   Requirements   <--              <--   Design    <--            <--             <--
 
 * Updated/Modern
-> Feasibility Study -\>/<- Requirements -\>/<- Specification -\>/<- Global Design -\>/<- Detailed Design -\>/<- Implementation -\>/<- V & V -\>/<- Distribution
+>   Feasibility   -->  Requirements   -->  Specification   -->   Global   -->  Detailed  --> Implementation --> V & V --> Distribution
+>     Study       <--                 <--                  <--   Design   <--   Design   <--                <--       <--
 
-The above **theoretical** model _Drawbacks/Inconveniences:_
-* Late appearance of code; code provides a more direct feedback for feasibility and often times problems appear only when coding, late appearance of code means these problems will only appear later
+Drawbacks/Inconveniences:
+* Late appearance of code: Code provides a more direct feedback for feasibility and often times problems appear only when coding
 * Doesn't take into consideration changes during steps
-* Maintenance activity not included
+* Maintenance is not taken into account
 * Division of labor hampering Total Quality Management
-* Impedance mismatches between analysis, design, and implementation (due to lack of communication)
+* Impedance mismatches between analysis, design, and implementation (due to reliance on intermediary documents)
 * Highly synchronous model
 
-**Agile** adresses the above problems while also rejecting the problem-prone *upfront* requirements phase (**requirements change** over time; the time spent formalising requirements should be minimised). This also **reduces waste** because of requirements not being met (ex. using Lean). *Agile replaces requirements with user stories.*
+**Agile** adresses the above problems while also rejecting the problem-prone upfront requirements phase (**requirements change** over time; so the time spent **formalising** requirements should be minimised). This also reduces waste (Lean) because of requirements not being met. **Agile replaces requirements with user stories.**
 
-Some concrete examples of how agile methodologies address these:
+Some concrete examples of how agile methodologies address these issues:
 > Beck (XP): Requirements gathering is an activity that provides details just before it is needed in development.
 > Cohn (SCRUM): All work occurs within the repeated cycle of sprints with the absence of upfront analysis or design phase.
 > Poppendieck (Lean): Requirements should be more aptly called candidate solutions and not set in stone. "separating requirements from implementation is just another form of handover" 
