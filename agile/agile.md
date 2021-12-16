@@ -364,7 +364,65 @@ Agile Managers:
 * may need to evolve their management style, *e.g.* use Socratic questioning to help team discover solutions (rather than imposing a solution)
 
 ### Other Agile roles
+- Expert User [Crystal]
+Allows the obtention of actual and accurate needs from actual users
+  * Should be an actual user (not just a tester from the development team)
+  * Has expert knowledge of the project area
+  * Answers questions
+  * Suggests solutions to problems
+Crystal advises a 2-hour meeting a minimum once per week with the ability to make phone calls
 
+- Customer [XP]
+The customer:
+  * provides precise stories allowing developers to produce comprehensive task cards and accurate estimates
+  * weighs stories against each other and analyzes risk correctly, choosing stories of maximum value for the next iteration
+  * trusts developer's technical decisions
+  * works within the team in order to quickly provide accurate on-the-go guidance and feedback
+
+- Developer [XP, SCRUM]
+**Turns customer stories into working code**
+
+> Frequently asks himself "How to implement it?", "How long will it take?", "What are the risks?
+
+Obligations:
+* Works with customer to understand the stories
+* Decides implementation from a story
+* Estimate work for each story, based on implementation decisions and experience
+* Knows and understands technical issues
+* Creates and maintains the system as it evolves
+* Identify features that depend on other features
+* Identify risky features and reports them to customer
+* Follows team guidelines
+* Implements only what is necessary
+* Communicates with customer constantly
+
+Rights (?):
+* Estimates own work
+* Works sensibly and schedules only work that can be done (so the schedule is predictable)
+* Focuses on testing, refactoring, and customer comunication to produce code that meets customer's needs
+* Allows the customer to make *business decisions*
+
+- Tracker [XP, SCRUM]
+Keeps track of the schedule by monitoring progress and rate of progress in order to determine if the iteration is on schedule. This is done by asking each developer how many tasks they have completed every few days
+
+> Velocity: ratio of ideal time estimated for tasts to actual time spent implementing them
+
+Keeps in mind:
+* changes in velocity
+* amount of overtime worked
+* ratio of passing to failing tests
+
+- Coach [XP]
+*Optional role*
+
+The coach:
+* guides and mentors the team
+* leads by example
+* teaches when necessary (even if it's by doing)
+* may offer ideas to solve thorny problems
+* may serve as intermediary with management
+
+*In SCRUM, this role is absorbed into SCRUM Master.*
 
 ## Practices
 
