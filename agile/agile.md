@@ -727,6 +727,7 @@ Publish acceptance test score to the team so everyone knows what is going on
 ```
 
 ### Management (and others)
+
 ```
 **Scrum of scrums** [SCRUM]
 *to address beyond 7 +/2 teams*
@@ -842,11 +843,175 @@ goals:
 *not many companies apply this*
 
 *in general, don't plan too tight, don't plan every second of your workday, leave some room*
-
 ```
 
 ## Artifacts
 
+### From user stories to burndown charts
+
+Virtual/intellectual artifacts, physical artifacts (to support virtual artifacts)
+here, we mix both
+
+* User story [XP,SCRUM]
+defines an atom of functionality (see practices)
+
+* Story card [XP]
+to express user stories
+EXAMPLE
+*can be done in software tools*
+
+* Task card [XP]
+for implementing an iteration, defines number of tasks
+
+* Use case
+*used outside agile too, for example one of UML diagram types*
+describes how to achieve single business goal or task through the interactions between external actors and system
+
+use case v/s user story: (both describe the interaction of a user with the system) see previous line
+
+use case example:
+e.g.online customer can view products, purchase products > payment processing system, etc.
+EXAMPLE
+
+> "Think of a user story as a use case at 2 bits of precision"
+
+User story:
+* very simple
+* written by customer
+* incomplete, possibly innacurate
+* does not handle exceptional cases
+* starting point for additional discussions with customer
+
+Use case:
+* more complex
+* written by developer in cooperation with customer
+* attempts to be complete, accurate
+* should handle all possible cases
+* intended to answer any developer questions about customer requirement without further interaction with customer
+
+a user story is a starting point for additional discussions with the customer, while a use case typically does not require further interaction with the customer
+
+* Product backlog [SCRUM]
+  * maintained throughout project
+  * property of product owner
+  * open and editable by anyone
+  * contains backlog items: broad descriptions of all potential features, prioritized by business value
+  * includes estimates of business value
+  * includes estimates of development effort, set by team
+
+Visualised in "task board" (next)
+
+* Task Board, Story Board [SCRUM]
+visual representation of backlog
+EXAMPLE
+used to see and change the state of the tasks of the current sprint: "to do", "in progress", "done".
+
+benefits:
+- transparency
+- collaboration
+- prioritization
+- focus
+- self-organisation
+- empiricism (decision making based on actual progress)
+- "humility"
+- morale
+
+* velocity [SCRUM]
+measure (numerically) of progress in a project:
+  number of items delivered
+  
+  can be:
+  * measures in tasks, user stories, backlog items, ...
+
+how to keep track:
+* burndown chart
+publicly displayed chart, updated ervy day, showing, for the sprint backlog:
+- remaining work
+- progress
+EXAMPLE
+x = days
+y = remaining tasks
+
+blue line: if constant velocity
+
+curve goes up if tasks are added (so it shows also how much unanticipated tasks arose)
+
+shows both progress and the remaining work in terms of velocity
+
+* bullpen [XP]
+single, open room
+(see "informative workspace" principle)
+
+where people work
+everyone can interact with anyone
+
+## Assessment of agile methods
+assessment is needed to ascertain what of all the ideas are right and not right for your project and team
+
+**ugly** (harmful, not recommended):
+* rejection of upfront tasks
+  * particularly: no upfront requirements
+  * dismissal of a priori architecture work
+* user stories as a replacement for abstract requirements (user stories are too specific, describing individual interactions with the system)
+* tests as a replacement for specifications
+* feature-based development and ignorance of dependencies
+* method keeper (e.g. Scrum Master) as a separate role
+* test-driven development (but not the rest of agile's emphasis on tests)
+* dismissal of traditional manager tasks
+* dismissal of auxiliairy products and non-shippable artifcats (ludite rule; some extra things DO need to be coded)
+* dismissal of a priori concern for extensibility
+* dismissal of a priori concern for reusability
+
+*analysis paralysis?*
+
+dual development good; AT SOME POINT stop looking at the problem and jump into the solution
+
+going into code directly can be harmful; some time is needed to analyse the problem before coding
+
+user stories validate requirements, not replace them
+
+scrum master should code too
 
 
- 
+
+**hype/the indifferent**: (just hyped... result may vary/not be of much help)
+* pair programming (good only in select cases)
+* open-space working arrangements (can be as destructive as beneficial if people don't get along together)
+* self-organising teams
+* maintaining a sustainable pace (sometimes the customer just wants a big delivery/release)
+* producing minimal functionality
+* planning poker
+* cross-functional teams (inevitable that some people are expert in an area)
+* embedded customer (scrum product owner is a more realistic idea)
+
+**good** (show to be highly beneficial by studies):
+* acceptance of change (embrace the soft in software)
+* iterative development
+* emphasis on working code
+* tests as one of the key resources of the project
+* constant test regression analysis
+* notion of velocity (actual real numerical measure of the progress of the project)
+* no branching
+* product (but not user stories!) burndown chart
+* daily meeting
+
+**brilliant**
+* short iterations
+* closed-window rule (helps with the natural phenomenon of filtering and attrition especially when coupled with short iterations)
+* refactoring (but not as a substitute for design)
+* associating a test with every piece of functionality
+* continuous integration
+
+**Final observations**
+
+software development is hard; quality is key
+
+lots of good ideas can help; there is no reason to reject those from a particular style of software engineering
+  * particularly in the absence of credible empirical data
+
+agile can complement and can be complemented
+
+Agile will find its place in the history of productive software engineering ideas
+
+agile is a major step in the evolution of software engineering
+
