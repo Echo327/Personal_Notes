@@ -4,12 +4,16 @@
 
 ### Waterfall **Model**
 * Royce (1970)
->      System       -->     Software     -->   Analysis   -->   Program   -->   Coding   -->   Testing   -->   Operations  
->   Requirements    <--   Requirements   <--              <--   Design    <--            <--             <--
+<pre>
+>     System       -->     Software     -->   Analysis   -->   Program   -->   Coding   -->   Testing   -->   Operations  
+>  Requirements    <--   Requirements   <--              <--   Design    <--            <--             <--
+</pre>
 
 * Updated/Modern
->   Feasibility   -->  Requirements   -->  Specification   -->   Global   -->  Detailed  --> Implementation --> V & V --> Distribution   
->     Study       <--                 <--                  <--   Design   <--   Design   <--                <--       <--
+<pre>
+>  Feasibility   -->  Requirements   -->  Specification   -->   Global   -->  Detailed  --> Implementation --> V & V --> Distribution   
+>    Study       <--                 <--                  <--   Design   <--   Design   <--                <--       <--
+</pre>
 
 Drawbacks/Inconveniences:
 * Late appearance of code: Code provides a more direct feedback for feasibility and often times problems appear only when coding
