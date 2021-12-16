@@ -1,6 +1,6 @@
 # Agile Software Development
 
-## How and Why
+## Why and How
 
 ### Waterfall **Model**
 * Royce (1970)
