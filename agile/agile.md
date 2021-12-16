@@ -4,11 +4,11 @@
 
 ### Waterfall **Model**
 * Royce (1970)
->      System       -->     Software     -->   Analysis   -->   Program   -->   Coding   -->   Testing   -->   Operations
+>      System       -->     Software     -->   Analysis   -->   Program   -->   Coding   -->   Testing   -->   Operations  
 >   Requirements    <--   Requirements   <--              <--   Design    <--            <--             <--
 
 * Updated/Modern
->   Feasibility   -->  Requirements   -->  Specification   -->   Global   -->  Detailed  --> Implementation --> V & V --> Distribution
+>   Feasibility   -->  Requirements   -->  Specification   -->   Global   -->  Detailed  --> Implementation --> V & V --> Distribution   
 >     Study       <--                 <--                  <--   Design   <--   Design   <--                <--       <--
 
 Drawbacks/Inconveniences:
