@@ -6,4 +6,4 @@
 * "Agile Software Development" on edX (ETHx ASD.1x) ; Bertrand Meyer from ETH Zürich
 
 ### [sql] Structured Query Language
-* "" on Udemy () ; from
+* "Simplified SQL" on Udemy () ; from
