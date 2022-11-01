@@ -11,3 +11,4 @@ These are my personal notes and in no way try to replace the actual courses. I e
 ## [sql] Structured Query Language
 (UNDEFINED HIATUS)
 - "Simplified SQL" on Udemy () ; from
+
