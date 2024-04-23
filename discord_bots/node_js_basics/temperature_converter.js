@@ -20,6 +20,8 @@
 // switchcase
 module.exports = {
     temperature_converter: function(value, start_unit, end_unit){
+        // Converts value temperature from start_unit to end_unit
+        // Example: 50°C -> °F (value = 50, start_unit = C, end_unit = F)
         let converted_value = undefined;
         switch (start_unit){
             case "C":

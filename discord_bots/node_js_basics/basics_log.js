@@ -1,16 +1,16 @@
 module.exports = {
     basics_log: function(my_inp){
-        // console.log() + variables
-        let my_str = "Welcome to Node.js!"; // scope = block
+        // Tutorial for console.log() + variables
+        let my_str = "Welcome to Node.js!"; // "let" variable scope = block
         console.log(my_str);
         console.log("This is a string: 4. This is an integer:", 4);
-        var my_var = 2+3/4; // scope = function
-        const my_var_2 = my_var; // cannot be reassigned
+        var my_var = 2+3/4; // "var" variable scope = function
+        const my_var_2 = my_var; // const cannot be reassigned
         console.log("2+3/4 =",my_var);
-        // For loop
-        let arrr = [];
+        // FOR loop
+        let arrr = []; // array initialisation
         for (let i=0; i<10; i++){
-            // If conditional
+            // IF conditional
             let denominator = 2;
             if (i%denominator == 0){
                 process.stdout.write("Adding "+i+" to array.\n");
