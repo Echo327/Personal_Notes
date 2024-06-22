@@ -6,7 +6,12 @@ module.exports = {
             // following line allows ignoring any message from bots
             return
         }
-        else {
+        else if (message.channel.name == "bot-test-channel"){
+            // ignore specific channel until slash commands are supported 
+            // To-Do: support slash commands 
+            return
+        } 
+	else {
             console.log(DateTime.ms_to_date(message.createdTimestamp, "ms"), "New message was written by", message.author.globalName+".");
         }
 
