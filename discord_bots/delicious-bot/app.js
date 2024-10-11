@@ -5,9 +5,12 @@ const msgCreateHandler = require('./handlers/messageCreate')
 const bot_id = require("../private/delicious_bot.json"); // delicious-bot configuration
 const { processMessage } = require("./handlers/messageCreate");
 
+global.rootdir = process.cwd();
+
 // variables
 const command_prefix = "!";
 global.annoying = false;
+global.mode = "command";
 
 // Main hub for interacting with Discord API
 // Intents : which events bots receives

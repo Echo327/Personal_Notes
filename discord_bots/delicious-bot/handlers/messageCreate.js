@@ -1,3 +1,7 @@
+const { processMove } = require("./janken");
+const { SaveGameData } = require("./janken");
+const { ReadGameData } = require("./janken");
+
 module.exports = {
     processMessage: function(DateTime, command_prefix, message){
         // if message written by user(false)/bot(true)
@@ -25,7 +29,9 @@ module.exports = {
                 case "!help":
                     message.reply("I am here to help!\n \
                     Available commands: !help !toggleannoying\n \
-                    (in progress) !serverage !userage");
+                    !janken\n \
+                    (in progress) !serverage !userage\n\n \
+                    Current mode: "+mode);
                     break;
                 case "!serverage":
                     console.log(message.createdTimestamp);
@@ -58,8 +64,39 @@ module.exports = {
                         message.reply("muahahahaha");
                     }
                     break;
+                case "!janken":
+                    mode = "janken";
+                    global.nb_draw = 0;
+                    global.nb_win = 0;
+                    global.nb_loss = 0;
+                    message.reply("Welcome to Rock, Paper, Scissors.\n  \
+                        Possible moves: Rock, Paper, Scissors.\n \
+                        Type \"results\" to compare previous game results to current one. \n \
+                        Type \"end\" to stop game.")
+                    break;
                 default:
                     message.reply("Sorry, I did not understand your request...");
+            }
+        }
+        else if (mode == "janken"){
+            // to-do: switch to switchcase on userMessage
+            if (userMessage == "rock" || userMessage == "paper" || userMessage == "scissors"){
+                processMove(userMessage, message);
+            }
+            else if (userMessage == "results"){
+                let save_data = ReadGameData(message);
+                message.reply("Last game results: \n \
+                    Player = "+save_data.name+"\n \
+                    Win-Lose-Draw : "+save_data.WinLoseDraw+"\n \
+                    Current Game (Win-Lose-Draw) : "+nb_win+"-"+nb_loss+"-"+nb_draw);
+            }
+            else if (userMessage == "end"){
+                mode = "command";
+                SaveGameData(message);
+                message.reply("Game ended.");
+            }
+            else{
+                message.reply("Janken move not recognised.")
             }
         }
         else{
