@@ -18,8 +18,7 @@ module.exports = {
     ms_to_age: function(value, unit){
         // Converts time difference into human readable format
         let milliseconds = value*dict[unit];
-        let nb_days = Math.floor(milliseconds/dict["d"]);
-        console.log("days ", nb_days);
-        // to complete
+        let nb_days = Math.ceil(milliseconds/dict["d"]);
+        return nb_days+" days";
     }
 }

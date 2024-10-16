@@ -4,53 +4,70 @@ const { ReadGameData } = require("./janken");
 
 module.exports = {
     processMessage: function(DateTime, command_prefix, message){
-        // if message written by user(false)/bot(true)
+        // ignore any message from bots
         if (message.author.bot){
             console.log("A bot has spoken.");
-            // following line allows ignoring any message from bots
             return
         }
+        // ignore specific channel until slash commands are supported
         else if (message.channel.name == "bot-test-channel"){
-            // ignore specific channel until slash commands are supported 
             // To-Do: support slash commands 
             return
-        } 
-	else {
+        }
+	    else {
+            // Log username and timestamp for user messages
             console.log(DateTime.ms_to_date(message.createdTimestamp, "ms"), "New message was written by", message.author.globalName+".");
         }
-
+        
+        // user message pre-processing
         const userMessage = message.content.toLowerCase();
-        // check for bot command
+
+        // process user message
         if (message.content[0] == command_prefix){
             if (annoying){ message.reply("Let me think... 1%...2%...5% processed... ... ..."); }
 
             // process command
             switch(userMessage){
                 case "!help":
+                    // Displays general help documentation
                     message.reply("I am here to help!\n \
-                    Available commands: !help !toggleannoying\n \
+                    Available commands: !help !morehelp !toggleannoying\n \
+                    !serverage !userage\n \
                     !janken\n \
-                    (in progress) !serverage !userage\n\n \
+                    (in progress) !poll \n\n \
                     Current mode: "+mode);
                     break;
+                case "!morehelp":
+                    message.reply(
+                        "Help (with Description)\n\
+                        !serverage : How old this server is.\n\
+                        !userage : How long since you've been on this server.\n\
+                        !janken : Rock, Paper, Scissors."
+                    );
+                    break;
                 case "!serverage":
-                    console.log(message.createdTimestamp);
-                    console.log(message.guild.createdTimestamp);
-                    let age = message.createdTimestamp - message.guild.createdTimestamp;
-                    DateTime.ms_to_age(age);
-                    message.reply("Server created on "+ DateTime.ms_to_date(message.guild.createdTimestamp, "ms"));
+                    // Displays server age
+                    let server_create = message.guild.createdTimestamp;
+                    let request_date = message.createdTimestamp;
+                    let server_age = DateTime.ms_to_age(request_date - server_create, "ms");
+                    message.reply("Server created on "+ DateTime.ms_to_date(message.guild.createdTimestamp, "ms")+".\n\
+                    "+message.guild.name+" is "+server_age+" old.");
                     break;
                 case "!userage":
+                    // Displays user join age
                     message.guild.members.fetch().then(
                         (value) => {
-                            value.forEach(user => {
+                            value.forEach((user) => {
                                 if (user.user.id == message.author.id){
-                                    console.log(user.joinedTimestamp);
-                                    message.reply(user.user.tag+", you joined on "+ DateTime.ms_to_date(user.joinedTimestamp, "ms"));
+                                    let user_joined_on = user.joinedTimestamp;
+                                    let request_date = message.createdTimestamp;
+                                    let user_age = DateTime.ms_to_age(request_date - user_joined_on, "ms");
+                                    message.reply(user.user.tag+", you joined on "+ DateTime.ms_to_date(user_joined_on, "ms")+".\n\
+                                    You've been here for "+user_age+".");
                                 }
                             });
                         }, (error) => {
-                            console.log(error);
+                            console.log("Userage Error: "+error);
                         }
                     );
                     break;
@@ -65,38 +82,54 @@ module.exports = {
                     }
                     break;
                 case "!janken":
+                    // Switch to rock-paper-scissors mode
                     mode = "janken";
-                    global.nb_draw = 0;
-                    global.nb_win = 0;
-                    global.nb_loss = 0;
-                    message.reply("Welcome to Rock, Paper, Scissors.\n  \
-                        Possible moves: Rock, Paper, Scissors.\n \
-                        Type \"results\" to compare previous game results to current one. \n \
-                        Type \"end\" to stop game.")
+                    global.janken_data = {
+                        nb_draw : 0,
+                        nb_win : 0,
+                        nb_loss : 0
+                    }
+                    message.reply("Welcome to unlimited Rock, Paper, Scissors.\n  \
+                        Possible moves: **Rock**, **Paper**, **Scissors**.\n \
+                        Type \"**results**\" to compare previous game results to current one. \n \
+                        Type \"**end**\" to stop the current game and save results.")
                     break;
                 default:
-                    message.reply("Sorry, I did not understand your request...");
+                    if (annoying){ message.reply("You don't make sense, jackass.")}
+                    else{
+                        message.reply("Sorry, I did not understand your request...");
+                    }
             }
         }
         else if (mode == "janken"){
-            // to-do: switch to switchcase on userMessage
-            if (userMessage == "rock" || userMessage == "paper" || userMessage == "scissors"){
-                processMove(userMessage, message);
-            }
-            else if (userMessage == "results"){
-                let save_data = ReadGameData(message);
-                message.reply("Last game results: \n \
-                    Player = "+save_data.name+"\n \
-                    Win-Lose-Draw : "+save_data.WinLoseDraw+"\n \
-                    Current Game (Win-Lose-Draw) : "+nb_win+"-"+nb_loss+"-"+nb_draw);
-            }
-            else if (userMessage == "end"){
-                mode = "command";
-                SaveGameData(message);
-                message.reply("Game ended.");
-            }
-            else{
-                message.reply("Janken move not recognised.")
+            switch(userMessage){
+                case "rock":
+                case "paper":
+                case "scissors":
+                    processMove(userMessage, message);
+                    break;
+                case "results":
+                    let save_data = ReadGameData(message);
+                    if (save_data == undefined) {
+                        message.reply("No previous game data found.");
+                        break;
+                    }
+                    // to-do: results for 10 last games
+                    // To-Do: only display data from this server
+                    message.reply("Last game results: \n \
+                        Player = "+save_data.name+"\n \
+                        Win-Lose-Draw : "+save_data.WinLoseDraw+"\n \
+                        Current Game (Win-Lose-Draw) : "+janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw);
+                    break;
+                case "end":
+                    mode = "command";
+                    SaveGameData(message);
+                    message.reply("Game ended.");
+                    break;
+                default:
+                    // allow regular messages
+                    break;
+                    // message.reply("Janken move not recognised.")
             }
         }
         else{
@@ -104,6 +137,6 @@ module.exports = {
             if (annoying){ message.reply("Hello human! You're the best!! I love you!!! <3"); }
         }
 
-        return;
+        return 0;
     }
 }
