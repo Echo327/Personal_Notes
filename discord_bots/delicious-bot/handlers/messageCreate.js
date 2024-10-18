@@ -1,6 +1,4 @@
-const { processMove } = require("./janken");
-const { SaveGameData } = require("./janken");
-const { ReadGameData } = require("./janken");
+const { processMove, SaveGameData, ReadGameData } = require("./janken");
 
 module.exports = {
     processMessage: function(DateTime, command_prefix, message){
@@ -84,6 +82,7 @@ module.exports = {
                 case "!janken":
                     // Switch to rock-paper-scissors mode
                     mode = "janken";
+                    janken_game_id++;
                     global.janken_data = {
                         nb_draw : 0,
                         nb_win : 0,
@@ -92,7 +91,8 @@ module.exports = {
                     message.reply("Welcome to unlimited Rock, Paper, Scissors.\n  \
                         Possible moves: **Rock**, **Paper**, **Scissors**.\n \
                         Type \"**results**\" to compare previous game results to current one. \n \
-                        Type \"**end**\" to stop the current game and save results.")
+                        Type \"**end**\" to stop the current game and save results.\n \
+                        Type \"**ragequit**\" to quit without saving")
                     break;
                 default:
                     if (annoying){ message.reply("You don't make sense, jackass.")}
@@ -110,24 +110,28 @@ module.exports = {
                     break;
                 case "results":
                     let save_data = ReadGameData(message);
-                    if (save_data == undefined) {
+                    if (save_data.length == 0) {
                         message.reply("No previous game data found.");
                         break;
                     }
-                    // to-do: results for 10 last games
                     // To-Do: only display data from this server
-                    message.reply("Last game results: \n \
-                        Player = "+save_data.name+"\n \
-                        Win-Lose-Draw : "+save_data.WinLoseDraw+"\n \
-                        Current Game (Win-Lose-Draw) : "+janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw);
+                    let reply = "";
+                    for (let i = 0; i < save_data.length; i++){
+                        reply += save_data[i].time +
+                        " ; Started by "+save_data[i].name+
+                        " ; Win-Lose-Draw : "+save_data[i].WinLoseDraw+"\n"
+                    }
+                    reply += "Current Game (Win-Lose-Draw) : "+janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw;
+                    message.reply(reply);
                     break;
                 case "end":
-                    mode = "command";
                     SaveGameData(message);
+                case "ragequit":
+                    mode = "command";
                     message.reply("Game ended.");
                     break;
                 default:
-                    // allow regular messages
+                    // allow regular messages during play
                     break;
                     // message.reply("Janken move not recognised.")
             }

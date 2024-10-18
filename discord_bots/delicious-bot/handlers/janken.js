@@ -10,6 +10,14 @@ const moves = {
     2    : "scissors"
 }
 
+function ReadDataFile() {
+    let GameData = fs.readFileSync(path, encoding);
+    if (GameData == undefined || GameData == ""){
+        return [];
+    } 
+    return JSON.parse(GameData);
+}
+
 module.exports = {
     processMove: function(Player_Move, message){
         let reply = "Player plays "+Player_Move+".";
@@ -35,23 +43,32 @@ module.exports = {
         message.reply(reply);
     },
     SaveGameData: function(msg){
-        // to-do: increment ID
-        // to-do: save last 10 games (if array empt/if array not empty)
-        let data = {
-            ID : 0,
+        let new_data = {
+            ID : janken_game_id,
             userId : msg.author.id,
             name : msg.author.tag,
             WinLoseDraw : janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw,
             Rounds : janken_data.nb_win+janken_data.nb_loss+janken_data.nb_draw,
-            time : new Date().toString()
+            time : new Date().toLocaleString('en-GB')
         };
+
+        data = ReadDataFile();
+        console.log(data);
+        if (data.length == 0){
+            data = [new_data];
+        }
+        else if (data.length > 0){
+            data.push(new_data);
+        }
+
+        // only keep 10 most recent games
+        while (data.length > 10){
+            data.shift();
+        }
+
         fs.writeFileSync(path, JSON.stringify(data));
     },
     ReadGameData: function(){
-        let GameData = fs.readFileSync(path, encoding);
-        if (GameData == undefined || GameData == ""){
-            return undefined;
-        } 
-        return JSON.parse(GameData);
+        return ReadDataFile();
     }
 }

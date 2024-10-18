@@ -11,6 +11,7 @@ global.rootdir = process.cwd();
 const command_prefix = "!";
 global.annoying = false;
 global.mode = "command";
+janken_game_id = 0;
 
 // Main hub for interacting with Discord API
 // Intents : which events bots receives
