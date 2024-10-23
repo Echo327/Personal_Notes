@@ -2,16 +2,21 @@ const Discord = require("discord.js"); // discord node module
 const DateTime = require('./date_and_time')
 const msgCreateHandler = require('./handlers/messageCreate')
 
-const bot_id = require("../private/delicious_bot.json"); // delicious-bot configuration
-const { processMessage } = require("./handlers/messageCreate");
+// To-Do: add robustness to path variables
+// global.rootdir = process.cwd();
 
-global.rootdir = process.cwd();
+const bot_id = require("../private/delicious_bot.json"); // delicious-bot configuration
 
 // variables
-const command_prefix = "!";
+const command_prefix = "!";     // will only process commands with this prefix
 global.annoying = false;
 global.mode = "command";
-janken_game_id = 0;
+global.janken_data = {
+    game_id : 0,
+    nb_draw : 0,
+    nb_win : 0,
+    nb_loss : 0
+}
 
 // Main hub for interacting with Discord API
 // Intents : which events bots receives

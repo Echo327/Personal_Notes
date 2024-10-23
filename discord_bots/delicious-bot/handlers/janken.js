@@ -11,6 +11,7 @@ const moves = {
 }
 
 function ReadDataFile() {
+    // To-Do: check if file doesn't exist? or included in readFileSync
     let GameData = fs.readFileSync(path, encoding);
     if (GameData == undefined || GameData == ""){
         return [];
@@ -44,16 +45,15 @@ module.exports = {
     },
     SaveGameData: function(msg){
         let new_data = {
-            ID : janken_game_id,
+            ID : janken_data.game_id,
             userId : msg.author.id,
             name : msg.author.tag,
             WinLoseDraw : janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw,
             Rounds : janken_data.nb_win+janken_data.nb_loss+janken_data.nb_draw,
             time : new Date().toLocaleString('en-GB')
         };
-
+        // To-Do: check that no data is undefined before saving
         data = ReadDataFile();
-        console.log(data);
         if (data.length == 0){
             data = [new_data];
         }

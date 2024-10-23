@@ -82,12 +82,10 @@ module.exports = {
                 case "!janken":
                     // Switch to rock-paper-scissors mode
                     mode = "janken";
-                    janken_game_id++;
-                    global.janken_data = {
-                        nb_draw : 0,
-                        nb_win : 0,
-                        nb_loss : 0
-                    }
+                    janken_data["game_id"]++;
+                    janken_data.nb_draw = 0;
+                    janken_data.nb_win = 0;
+                    janken_data.nb_loss = 0;
                     message.reply("Welcome to unlimited Rock, Paper, Scissors.\n  \
                         Possible moves: **Rock**, **Paper**, **Scissors**.\n \
                         Type \"**results**\" to compare previous game results to current one. \n \
@@ -101,11 +99,14 @@ module.exports = {
                     }
             }
         }
+        // Rock-Paper-Scissors mode
         else if (mode == "janken"){
             switch(userMessage){
                 case "rock":
                 case "paper":
                 case "scissors":
+                    // To-Do: only process if game in right server and by right user
+                    // To-Do: else either say game in progress elsewhere or by other user
                     processMove(userMessage, message);
                     break;
                 case "results":
@@ -131,7 +132,7 @@ module.exports = {
                     message.reply("Game ended.");
                     break;
                 default:
-                    // allow regular messages during play
+                    // allows regular messages during play
                     break;
                     // message.reply("Janken move not recognised.")
             }
