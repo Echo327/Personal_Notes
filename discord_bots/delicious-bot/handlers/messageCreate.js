@@ -80,12 +80,18 @@ module.exports = {
                     }
                     break;
                 case "!janken":
+                    if (mode == "janken"){
+                        message.reply("Another game is already in progress.")
+                        break;
+                    }
                     // Switch to rock-paper-scissors mode
                     mode = "janken";
                     janken_data["game_id"]++;
                     janken_data.nb_draw = 0;
                     janken_data.nb_win = 0;
                     janken_data.nb_loss = 0;
+                    janken_data.player = message.author.name;
+                    janken_data.server = message.guild.name;
                     message.reply("Welcome to unlimited Rock, Paper, Scissors.\n  \
                         Possible moves: **Rock**, **Paper**, **Scissors**.\n \
                         Type \"**results**\" to compare previous game results to current one. \n \
@@ -100,19 +106,20 @@ module.exports = {
             }
         }
         // Rock-Paper-Scissors mode
-        else if (mode == "janken"){
+        else if (mode == "janken" 
+            && janken_data.player == message.author.name
+            && janken_data.server == message.guild.name){
             switch(userMessage){
                 case "rock":
                 case "paper":
                 case "scissors":
-                    // To-Do: only process if game in right server and by right user
-                    // To-Do: else either say game in progress elsewhere or by other user
                     processMove(userMessage, message);
                     break;
                 case "results":
                     let save_data = ReadGameData(message);
                     if (save_data.length == 0) {
-                        message.reply("No previous game data found.");
+                        message.reply("No previous game data found.\n\
+                            Current Game (Win-Lose-Draw) : "+janken_data.nb_win+"-"+janken_data.nb_loss+"-"+janken_data.nb_draw);
                         break;
                     }
                     // To-Do: only display data from this server
@@ -129,6 +136,8 @@ module.exports = {
                     SaveGameData(message);
                 case "ragequit":
                     mode = "command";
+                    janken_data.player = "";
+                    janken_data.server = "";
                     message.reply("Game ended.");
                     break;
                 default:

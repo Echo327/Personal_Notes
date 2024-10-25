@@ -11,8 +11,15 @@ const moves = {
 }
 
 function ReadDataFile() {
-    // To-Do: check if file doesn't exist? or included in readFileSync
-    let GameData = fs.readFileSync(path, encoding);
+    let GameData = undefined;
+    try {
+        GameData = fs.readFileSync(path, encoding);
+    } catch (err) {
+        if ( err.code == "ENOENT"){
+            console.log("Janken data not found.")
+        }
+    }
+
     if (GameData == undefined || GameData == ""){
         return [];
     } 

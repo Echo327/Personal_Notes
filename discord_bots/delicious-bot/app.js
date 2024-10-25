@@ -15,7 +15,9 @@ global.janken_data = {
     game_id : 0,
     nb_draw : 0,
     nb_win : 0,
-    nb_loss : 0
+    nb_loss : 0,
+    player : "",    // current player
+    server: ""  // current server
 }
 
 // Main hub for interacting with Discord API
