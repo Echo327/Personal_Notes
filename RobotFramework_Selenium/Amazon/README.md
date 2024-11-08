@@ -1,0 +1,1 @@
+Done as an exercise to learn Selenium library use.
