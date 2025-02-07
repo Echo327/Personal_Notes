@@ -4,6 +4,7 @@ Resource    PO/LandingPage.robot
 Resource    PO/TopNav.robot
 
 *** Variables ***
+${first_result_full_xpath}    /html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[4]/div/div/span/div/div/div/div[2]/div/div/div[1]/a
 
 *** Keywords ***
 Open ${site_name} Website
@@ -17,7 +18,7 @@ Search For
     Wait Until Page Contains    results for "${item}"
 
 Select First Product
-    Click Link    xpath=/html/body/div[1]/div[1]/div[1]/div[1]/div/span[1]/div[1]/div[2]/div/div/div/div/span/div/div/div/div[2]/div/div/div[1]/h2/a
+    Click Link    xpath=${first_result_full_xpath}
     Wait Until Page Contains    Back to results
 
 Add Product to Cart

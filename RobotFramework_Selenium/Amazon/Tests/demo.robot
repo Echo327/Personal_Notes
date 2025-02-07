@@ -19,6 +19,8 @@ User must sign in to checkout
     Log    Searching for ${search term}
     Search For    ${search term}
 
+    Log    Check
+
     Log    Selecting first product from search results
     Select First Product
 
@@ -28,9 +30,12 @@ User must sign in to checkout
     Log    Beginning checkout
     Begin Checkout
 
+    Sleep    3
+
 *** Keywords ***
 Amazon Test Setup
     Open Browser    about:blank    edge
+    Maximize Browser Window
     Set Selenium Timeout    10s
 
 Amazon Test Teardown

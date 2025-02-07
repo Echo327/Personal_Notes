@@ -2,7 +2,10 @@
 Library     SeleniumLibrary
 
 *** Variables ***
-# Site Name =  Link    Verification Text
+# To give Input Data at runtime
+# robot.exe -v VAR: value
+
+# Site_Name =  Link    Verification Text
 @{Amazon}    https://www.amazon.com/    Search Amazon
 &{links}
 ...    Amazon=${Amazon}
