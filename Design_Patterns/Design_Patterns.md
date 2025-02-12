@@ -9,6 +9,8 @@
 3. [Patterns](#patterns)
   i. [Builder](#builder)
   ii. [Factory](#factory)
+  iii. [Prototype](#prototype)
+  iv. [Singleton](#singleton)
 
 ## Introduction
 
@@ -113,7 +115,7 @@ Uses inheritance to polymorphically call on the different factories
 
 ### Prototype
 
-A partially or fully initialized object that you copy (clone) and make use of.
+A partially or fully initialized object that you copy (clone) and/or customise before making use of.
 
 About object copying for customisation
 Use: When it’s easier to copy an existing object to fully initialize a new one
@@ -128,4 +130,7 @@ Prototype
   - This requires ‘deep copy’ support
     ‘Deep copy’ => copy objects as well as references while replicating the state of the references
     -> This allows the copied object and the prototype to be fully independent from each other
+  - another way is to serailize and deserialize (boost)
 - Cloning can (should?) be made convenient using a Factory
+
+### Singleton
