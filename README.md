@@ -12,3 +12,6 @@ These are my personal notes and in no way try to replace the actual courses. I e
 (UNDEFINED HIATUS)
 - "Simplified SQL" on Udemy () ; from
 
+# License
+
+All rights reserved. You may not use, modify, or distribute this work without explicit permission from the author.
