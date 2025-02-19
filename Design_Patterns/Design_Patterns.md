@@ -134,3 +134,20 @@ Prototype
 - Cloning can (should?) be made convenient using a Factory
 
 ### Singleton
+
+A component which is instantiated only once.
+
+For some components it only makes sense to have one in the system.
+
+Least loved Pattern.
+
+Sometimes only one instance of a component is enough. Sometimes the constructor call is costly so you only want to do it once and provide everyone with the same instance.
+
+For example
+
+- a database manager may only need to load a database once into memory at the start and then only has to reply to requests with data in the database.
+- an object factory which only needs 1 instanciation to allow a user to create objects afterwards.
+
+Another reason to have a singleton is to prevent users from having a copy of the object. Or you want to avoid the risk of having a specific object instantiated more than once when dealing with multiple threads.
+
+One problem that can arise with the Singleton is that a class tightly coupled with the Singleton can have tests associated that are testing the functioning of the Singleton it calls and not of the class itself. This can be mitigated using dependency injection. In short, hard dependance on a Singleton should be avoided, use dependency injection to make it possible for tests to use a Test Database on which the tester has total control.
