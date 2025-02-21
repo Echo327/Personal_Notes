@@ -11,6 +11,7 @@
   ii. [Factory](#factory)
   iii. [Prototype](#prototype)
   iv. [Singleton](#singleton)
+  v. [Adapter](#adapter)
 
 ## Introduction
 
@@ -151,3 +152,21 @@ For example
 Another reason to have a singleton is to prevent users from having a copy of the object. Or you want to avoid the risk of having a specific object instantiated more than once when dealing with multiple threads.
 
 One problem that can arise with the Singleton is that a class tightly coupled with the Singleton can have tests associated that are testing the functioning of the Singleton it calls and not of the class itself. This can be mitigated using dependency injection. In short, hard dependance on a Singleton should be avoided, use dependency injection to make it possible for tests to use a Test Database on which the tester has total control.
+
+To make a "safe" singleton, hide or delete the type's constructor, copy constructor, and copy assignment operator; create a static method that returns a reference to a static member
+Note: This type of implementation is thread-safe as from C++11
+
+Note: Types with closely coupled dependencies on singletons are more difficult to unit test. This is why direct dependency is not a good idea, and it's recommended to go via Dependency Injection to allow to decouple the singleton and provide a fake object for testing
+
+To see also how to define a singleton lifetime in a dependency injection (DI) container
+
+#### Monostate
+
+#### Multiton
+
+Singleton = only 1 instance possible
+Multiton = key map with restricted number of elements to allow a fixed number of instances
+
+### Adapter
+
+Getting the interface you want from the interface you have

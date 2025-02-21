@@ -6,7 +6,7 @@
 #include <vector>
 using namespace std;
 
-// Note - To Make Dummy Database
+// Note: To Make Dummy Database
 class Database
 {
 public:
