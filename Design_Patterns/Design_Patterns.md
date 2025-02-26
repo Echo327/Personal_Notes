@@ -5,13 +5,16 @@
 ## Table of Contents
 
 1. [Introduction](#introduction)
-2. [Types](#types)
+2. [Types](#types-gamma-categorization)
 3. [Patterns](#patterns)
   i. [Builder](#builder)
   ii. [Factory](#factory)
   iii. [Prototype](#prototype)
   iv. [Singleton](#singleton)
   v. [Adapter](#adapter)
+  vi. [Bridge](#bridge)
+  vii. [Composite](#composite)
+  viii. [Bridge](#bridge)
 
 ## Introduction
 
@@ -169,4 +172,206 @@ Multiton = key map with restricted number of elements to allow a fixed number of
 
 ### Adapter
 
+A construct which adapts an existing interface X to conform to the required interface Y
+
 Getting the interface you want from the interface you have
+
+Careful as intermediate representations such as caches or other optimisations can pile up.
+
+### Bridge
+
+A mechanism that decouples an interface (hierarchy) from a implementation (hierarchy)
+
+Connecting components together through abstractions
+
+Bridge prevents a 'Cartesian product' complexity explosion
+
+Example:
+
+- Base class `ThreadScheduler`
+- Can be preemptive or cooperative
+- Can run on Windows or Unix
+- End up with a 2x2 scenario: `WindowsPTS`, `UnixPTS`, `WindowsCTS`, `UnixCTS`
+
+Bridge pattern avoids the entity explosion
+
+Without Bridge, we have 4 distinct classes:
+
+```text
+ThreadScheduler
+^
+├── PreemptiveThreadScheduler
+│   ^
+│   ├── WindowsPTS
+│   ├── UnixPTS
+├── CooperativeThreadScheduler
+│   ^
+│   ├── WindowsPTS
+│   ├── UnixCTS
+```
+
+With Bridge
+
+```text
+ThreadScheduler ──────────────────> IPlatformScheduler
+-platformScheduler                      ^
+^                                       |
+├── PreemptiveThreadScheduler           ├── UnixScheduler
+├── CooperativeThreadScheduler          ├── WindowsScheduler
+```
+
+Depends on a platformScheduler that acts as an interface whether it's Linux or Windows Scheduler and inherits from either Preemptive or Cooperative Thread Scheduler. This ensures Loose coupling.
+
+#### Pimpl Idiom
+
+The Pimpl (Pointer to IMPLementation) idiom is a design pattern in C++ used to hide implementation details from the header file, reducing compilation dependencies and improving encapsulation. It is a form of information hiding that helps achieve better modularity and faster compilation times.
+
+Instead of defining all implementation details in the class definition, the class contains only a forward-declared pointer to an implementation (Impl class), which is defined in the .cpp file.
+
+**Benefits:**
+
+- Better Encapsulation: Hides implementation details from clients.
+- Reduced Compile-Time Dependencies: Changes in the implementation do not require recompiling the dependent code.
+- Binary Compatibility: Changes to the private implementation do not affect the public interface.
+- Stable ABI: Useful in libraries where changes to headers should not break client code.
+
+**Comparison with the Bridge Pattern**
+Pimpl is purely about compilation boundaries and implementation hiding.
+Bridge separates abstraction from implementation, often for flexibility in object-oriented designs.
+
+### Composite
+
+Treating individual and aggregate objects in the same manner
+
+Structural pattern used to treat individual (scalar) objects and compositions of objects uniformly. It is particularly useful for hierarchical structures like trees. ex. Foo and Collection\<Foo\> have common APIs
+
+**Key Concepts:**
+
+- Composes objects into tree structures to represent part-whole hierarchies.
+- Allows clients to treat individual objects and compositions of objects uniformly.
+- Uses a common interface for both simple and complex objects.
+
+**Components:**
+
+1. **Component** : An abstract class or interface defining common operations.
+2. **Leaf** : A single object that implements the component interface.
+3. **Composite** : A complex object that contains child components and implements operations recursively.
+
+**Example:**
+Imagine a File System:
+
+- **Component**: `FileSystemElement` (defines common operations)
+- **Leaf**: `File` (individual files)
+- **Composite**: `Folder` (can contain files or other folders)
+
+**Benefits:**
+
+- Simplifies client code by treating individual and composite objects the same.
+- Facilitates recursive structures.
+- Enhances scalability by allowing dynamic composition.
+
+**Example 1: Mathematical Expression**  
+
+- **Component**: `Expression` (Abstract class/interface defining an operation like `evaluate()`).  
+- **Leaf**: `Number` (Represents a simple numeric value, e.g., `5`, `10`).  
+- **Composite**: `Operation` (Represents expressions like `Addition`, `Multiplication`, which combine multiple expressions).  
+
+**Example Structure:**
+
+```md
+    (+)
+   /   \
+  5     (*)
+       /   \
+      2     3
+```
+
+Here, `+` is a composite, `5`, `2`, and `3` are leaves, and `*` is another composite.
+
+---
+
+**Example 2: Grouping of Shapes:**
+
+- **Component**: `Shape` (Defines common operations like `draw()`).  
+- **Leaf**: `Circle`, `Square`, `Triangle` (Individual shapes).  
+- **Composite**: `Group` (Contains multiple `Shape` elements, allowing nested groups).  
+
+**Example Structure:**  
+
+```md
+   Group
+  /     \
+Circle  Group
+        /    \
+     Square  Triangle
+```
+
+The top-level `Group` contains a `Circle` and another `Group`, which contains `Square` and `Triangle`.
+
+Note:
+
+C++ uses _duck typing_, expecting enumerable types to provide `begin()`/`end()`
+A single object can masquerade as a collection
+
+```cpp
+Foo* begin() { return this; }
+Foo* end() { return this+1; }
+```
+
+### Decorator
+
+Facilitates the addition of behaviors to individual objects
+Adding behavior without altering the class itself
+
+#### Definition  
+
+The **Decorator Pattern** is a structural design pattern that allows behavior to be dynamically added to individual objects without modifying their code. It promotes flexibility and code reusability by enabling functionalities to be added or removed at runtime.  
+
+#### Key Characteristics  
+
+- Uses **composition** instead of **inheritance** to extend behavior.  
+- Wraps an object with additional functionality in a **decorator class**.  
+- Can have multiple layers of decorators for complex behaviors.  
+- Keeps the **core class** unchanged while adding enhancements dynamically.  
+
+#### Structure  
+
+1. **Component Interface** – Defines the common interface for both concrete components and decorators.  
+2. **Concrete Component** – The base object whose functionality can be extended.  
+3. **Decorator Abstract Class** – Holds a reference to a component and implements the same interface.  
+4. **Concrete Decorators** – Extend functionality by wrapping the component with additional behavior.  
+
+#### Use Cases  
+
+- Extending UI components dynamically.  
+- Adding logging, authentication, or compression in a flexible way.  
+- Wrapping objects with new behavior without altering their codebase.  
+
+#### Pros & Cons  
+
+##### ✅ Advantages  
+
+- Promotes **Open/Closed Principle** (open for extension, closed for modification).  
+- More flexible than inheritance.  
+- Allows dynamic addition and removal of behavior.  
+
+##### ❌ Disadvantages  
+
+- Can result in **too many small classes**.  
+- May lead to **complex debugging** due to multiple wrappers.  
+
+The **Decorator Pattern** is a powerful tool for designing extensible and maintainable systems while avoiding deep inheritance trees.
+
+#### Differences Between Dynamic, Static, and Functional Decorators
+
+| Feature            | Dynamic Decorator                     | Static Decorator                     | Functional Decorator               |
+|--------------------|--------------------------------------|--------------------------------------|------------------------------------|
+| **Definition**    | Modifies behavior at runtime        | Applied at compile-time using templates or manually | Uses functions to wrap behavior  |
+| **Flexibility**   | Highly flexible, can be added/removed dynamically | Less flexible, needs predefined structure | Moderately flexible, function-based |
+| **Implementation** | Uses objects and composition        | Uses subclassing, templates, or explicit wrapping | Uses higher-order functions (lambdas, function objects) |
+| **Example Usage**  | Logging, UI components, middleware | Custom framework-specific enhancements (UI frameworks) | Logging, timing, memoization (`@staticmethod` in Python) |
+| **Performance**   | May have runtime overhead           | More optimized, as behavior is fixed at compile-time | Typically lightweight |
+| **Complexity**    | Can lead to deep wrapper chains     | More structured, but less dynamic   | Easier to understand and apply |
+
+---
+facade, flyweight, proxy (property proxy, virtual proxy, communication proxy; proxy vs decorator), chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
