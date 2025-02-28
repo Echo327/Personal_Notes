@@ -373,5 +373,63 @@ The **Decorator Pattern** is a powerful tool for designing extensible and mainta
 | **Performance**   | May have runtime overhead           | More optimized, as behavior is fixed at compile-time | Typically lightweight |
 | **Complexity**    | Can lead to deep wrapper chains     | More structured, but less dynamic   | Easier to understand and apply |
 
+### Façade
+
+The **Facade Design Pattern** is a structural design pattern that provides a simplified interface to a complex subsystem. It acts as a wrapper that hides the complexity of the system, offering a higher-level interface to clients, thus making the system easier to use and interact with.
+
+#### Key Concepts
+
+1. **Simplified Interface**: The facade simplifies access to complex systems by offering a straightforward interface, reducing the need for clients to interact with multiple subsystems.
+  
+2. **Encapsulation**: The facade hides the internal complexity of the subsystems and delegates tasks to the appropriate subsystem classes, maintaining a clean separation of concerns.
+
+3. **Subsystems**: In systems with many interacting components or classes, the facade pattern reduces the number of components the client must deal with directly, making it easier to use.
+
+4. **Loose Coupling**: By interacting only with the facade, clients are decoupled from the subsystems. This reduces dependencies and makes the system more maintainable.
+
+#### When to Use the Facade Pattern
+
+- **Complex systems**: When the system consists of multiple subsystems with a complex interrelationship, the facade can provide a simple interface for the client.
+- **Simplify client interactions**: When you want to reduce the complexity for the client by abstracting the inner workings of the system.
+- **Code integration**: When integrating multiple systems or third-party libraries and you want to present a consistent interface.
+
+#### Benefits of the Facade Pattern
+
+- **Ease of Use**: Clients interact with a simple, unified interface, rather than dealing with multiple subsystems.
+- **Reduced Complexity**: By using the facade, the client code is simplified, as it does not need to be aware of the internal complexities.
+- **Improved Maintainability**: The client is decoupled from subsystem changes, making it easier to maintain and modify subsystems without impacting the client.
+
+In summary, the **Facade Design Pattern** simplifies interactions with complex systems by providing a clean, high-level interface that hides internal complexity. It promotes ease of use, better maintainability, and improved flexibility in system design.
+
+#### Example
+
+```md
+          +------------------+
+          |   BankFacade     |
+          +------------------+
+                |  |  |
+      __________|__|__|__________
+     |           |       |        |
++------------+ +------------+ +------------+
+|  Account   | | Transaction| |    Loan    |
++------------+ +------------+ +------------+
+| openAccount| | deposit    | | applyForLoan|
+| closeAccount| | withdraw   | | approveLoan|
++------------+ +------------+ +------------+
+```
+
+### Flyweight
+
+The Flyweight design pattern is a structural pattern used to reduce memory usage by sharing common data among multiple objects. It is particularly useful when there are many objects that share similar state, but only a few distinct variations. Instead of creating new objects for each variation, the Flyweight pattern stores shared data in a centralized object, called a "flyweight," and allows other objects to reference that shared data.
+
+This pattern divides an object’s state into:
+
+1. **Intrinsic state**: Shared data that can be reused by multiple objects.
+2. **Extrinsic state**: Data that is specific to an object and varies with each instance.
+
+The Flyweight pattern minimizes memory consumption by sharing the intrinsic state across objects and storing only the extrinsic state as needed.
+
+In essence, it’s about reusing objects wherever possible to save on resources, particularly memory.
+
 ---
-facade, flyweight, proxy (property proxy, virtual proxy, communication proxy; proxy vs decorator), chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+proxy (property proxy, virtual proxy, communication proxy; proxy vs decorator), chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)

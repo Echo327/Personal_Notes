@@ -29,6 +29,7 @@ public:
     double getCost() const override { return T::getCost() + 1.5; }
 };
 
+// Note: Mix-in Inheritance (inheriting from a template argument)
 template <typename T>
 class Sugar : public T {
 public:
