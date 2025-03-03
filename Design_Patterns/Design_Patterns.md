@@ -14,7 +14,21 @@
   v. [Adapter](#adapter)
   vi. [Bridge](#bridge)
   vii. [Composite](#composite)
-  viii. [Bridge](#bridge)
+  viii. [Decorator](#decorator)
+  ix. [Facade](#façade)
+  x. [Flyweight](#flyweight)
+  xi. [Proxy](#proxy)
+  xii. [Chain of Responsibility](#chain-of-responsibility)
+  xiii. [Command](#command)
+  xiv. [Interpreter](#interpreter)
+  xv. [Iterator](#iterator)
+  xvi. [Mediator](#mediator)
+  xvii. [Memento](#memento)
+  xviii. [Observer](#observer)
+  xix.[State](#state)
+  xx. [Strategy](#strategy)
+  xxi. [Template](#template)
+  xxii. [Visitor](#visitor)
 
 ## Introduction
 
@@ -431,5 +445,58 @@ The Flyweight pattern minimizes memory consumption by sharing the intrinsic stat
 
 In essence, it’s about reusing objects wherever possible to save on resources, particularly memory.
 
+### Proxy
+
+The **Proxy Design Pattern** is a structural design pattern that provides an object representing another object. It acts as a surrogate or placeholder, controlling access to the real object. The proxy pattern is used to add an extra layer of control over the real object, often to perform actions like lazy initialization, access control, logging, or monitoring.
+
+There are different types of proxies:
+
+1. **Virtual Proxy**: Delays the creation and initialization of expensive objects until they are needed, which helps with performance optimization.
+  
+2. **Remote Proxy**: Represents an object that is in a different address space, often used in distributed systems where objects are accessed remotely.
+  
+3. **Protective Proxy**: Controls access to an object by ensuring that only authorized clients can interact with it, often for security purposes.
+  
+4. **Cache Proxy**: Provides cached access to an object, allowing for faster retrieval of frequently accessed data by avoiding unnecessary computation or data retrieval.
+
+By using a proxy, you can decouple the client from the real object, enabling greater flexibility and control over how the real object is used.
+
+Additionally there exists other types on non-core proxies:
+
+1. **Property Proxy**: This term typically refers to a proxy that controls access to specific properties or attributes of an object. It might be used for things like lazy loading or providing access control to a specific aspect of the object. While it's not one of the primary four types, it could be seen as a specialized form of the Virtual Proxy or Protective Proxy.
+
+2. **Communication Proxy**: This generally refers to a proxy that handles the communication between objects, often in distributed systems or client-server setups. It would be most closely related to the Remote Proxy, which acts as an intermediary for objects that are located in different address spaces or on different machines.
+
+#### Comparison of core proxy design patterns
+
+| **Proxy Type**       | **Purpose**                                                                 | **Common Use Cases**                                                    | **Key Characteristics**                                            |
+|----------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------|
+| **Virtual Proxy**     | Delays the creation/initialization of an expensive object until it’s needed. | Performance optimization, lazy loading of resources.                   | Initializes the real object only when it's required.               |
+| **Remote Proxy**      | Represents an object in a different address space, often on a remote machine. | Distributed systems, remote method invocation (RMI).                   | Handles communication with objects that reside remotely.          |
+| **Protective Proxy**  | Controls access to the real object, often for security or permission reasons. | Access control, security enforcement.                                  | Provides authorization checks before delegating actions to the real object. |
+| **Cache Proxy**       | Caches the result of expensive operations to improve performance on subsequent accesses. | Caching frequently requested data or operations.                       | Stores and reuses results from previous operations to optimize speed. |
+
+### Chain of Responsibility
+
+### Command
+
+### Interpreter
+
+### Iterator
+
+### Mediator
+
+### Memento
+
+### Observer
+
+### State
+
+### Strategy
+
+### Template
+
+### Visitor
+
 ---
-proxy (property proxy, virtual proxy, communication proxy; proxy vs decorator), chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
