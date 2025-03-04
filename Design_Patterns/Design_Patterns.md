@@ -478,7 +478,109 @@ Additionally there exists other types on non-core proxies:
 
 ### Chain of Responsibility
 
+A chain of components who all get a chance to process a command or query, optionally having default processing implementation and anbility to terminate the rpocessing chain.
+
+The **Chain of Responsibility** design pattern is a behavioral design pattern that allows a request to be passed along a chain of potential handlers until it is handled by an appropriate handler. Each handler in the chain has the ability to either handle the request or pass it along to the next handler in the chain.
+
+**Chain of Responsibility** pattern defines a request-handling mechanism in which a chain of objects is given the chance to handle a request. Each object in the chain either processes the request or passes it to the next handler in the chain. This pattern decouples the sender of a request from its receivers, allowing multiple objects to process the request in a flexible and extensible manner.
+
+#### Key Characteristics:
+
+- **Handlers**: The objects that process or forward the request.
+- **Chain**: The sequence of handlers where each handler either processes the request or forwards it to the next handler.
+- **Decoupling**: The sender of the request is decoupled from the handler(s), promoting loose coupling.
+  
+#### Benefits:
+
+- **Reduced coupling**: The sender does not need to know which handler will process the request.
+- **Flexible processing**: New handlers can be added to the chain without changing the request sender or existing handlers.
+- **Responsibility assignment**: The responsibility for handling a request can be distributed among multiple objects.
+
+The Chain of Responsibility pattern is particularly useful in situations where multiple handlers may be able to process a request, and the specific handler is not known in advance.
+
+#### Types of implementation
+
+| **Type**                | **Description**                                                                                         | **Use Case**                                                                                   |
+|-------------------------|---------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
+| **Single Chain**         | A linear chain where each handler either processes the request or passes it to the next handler.         | Classic use case where the request follows a specific order until it is processed.            |
+| **Multiple Chains**      | Multiple chains for different types of requests, where the request is routed to the appropriate chain.   | When requests need to be handled by different categories of handlers working in parallel.      |
+| **Circular Chain**       | Handlers form a circular loop, and requests cycle through the chain.                                    | When requests need to be processed in a round-robin or repeating manner.                       |
+| **Conditional Chain**    | The next handler is determined by specific conditions or the state of the request.                      | When decisions on which handler should process the request depend on dynamic conditions.       |
+| **Fallback Chain**       | Handlers are arranged to provide a failover mechanism, passing the request to the next handler if one fails. | For error handling or situations where request processing needs to continue in case of failure.|
+| **Composite Chain**      | Handlers may themselves be chains, allowing for more complex handling by delegating requests to sub-chains. | When responsibility is distributed among smaller sub-chains working together in the same process.|
+
+The **Pointer Chain** and **Broker Chain** are specialized variations that can be considered as extensions or specific implementations of the more general **Chain of Responsibility** pattern. These two types don't necessarily represent entirely new concepts but rather refine or combine aspects of the previous 6 types (Single, Circular, etc.). Here’s how they relate:
+
+##### placeholder
+
+##### **1. Pointer Chain**
+
+A **Pointer Chain** typically involves handlers that maintain a reference (pointer) to the next handler in the chain. This can fit into a few of the earlier mentioned Chain of Responsibility types:
+
+| **Type**                | **Pointer Chain Relation**                                                                                 |
+|-------------------------|------------------------------------------------------------------------------------------------------------|
+| **Single Chain**         | In a **Single Chain**, handlers hold a pointer (reference) to the next handler, making it a natural fit. Each handler is linked via pointers. |
+| **Multiple Chains**      | In **Multiple Chains**, each chain could have handlers holding pointers to the next handler in their respective chain. The pointers in this case allow for dynamic routing of requests to different chains. |
+| **Circular Chain**       | A **Circular Chain** inherently involves handlers pointing to each other in a loop, so a **Pointer Chain** could be used here as well. Each handler has a pointer to the next, and once the last handler is reached, it points back to the first handler, forming a loop. |
+| **Conditional Chain**    | **Pointer Chains** allow dynamic decision-making to determine which handler is next, and this can fit into **Conditional Chains** where the flow is decided by conditions. Handlers may point to different subsequent handlers based on conditions. |
+| **Fallback Chain**       | In a **Fallback Chain**, pointers could dynamically switch to the next available handler in case one handler fails, allowing the next handler to take over (failover). |
+| **Composite Chain**      | In a **Composite Chain**, handlers that themselves are chains (i.e., composed of sub-chains) can hold pointers to their respective sub-handlers, enabling dynamic delegation within a more complex setup. |
+
+In essence, a **Pointer Chain** is a flexible implementation where each handler has a reference to the next, making it applicable to the **Single**, **Multiple**, **Circular**, **Conditional**, **Fallback**, and **Composite** types. The key feature is the dynamic nature of how the handlers are linked and how requests can flow.
+
+#### **2. Broker Chain**
+
+The **Broker Chain** refers to a central entity (the "broker") that coordinates the passing of requests to handlers, and it typically involves more complex decision-making logic. It can be linked with various types in the following ways:
+
+| **Type**                | **Broker Chain Relation**                                                                                   |
+|-------------------------|------------------------------------------------------------------------------------------------------------|
+| **Single Chain**         | In a **Single Chain**, the broker could be responsible for dynamically managing which handler should be invoked next. This would be a centralized decision point before moving through the linear sequence of handlers. |
+| **Multiple Chains**      | A **Broker Chain** fits naturally with **Multiple Chains** when a central broker decides which chain should handle a request based on the request's characteristics, routing it to the correct chain. |
+| **Circular Chain**       | In a **Circular Chain**, the broker can be the entity that monitors the flow and determines if and when the request should cycle back through the chain. It can control the looping process or reset the flow of the request. |
+| **Conditional Chain**    | A **Broker Chain** can work with **Conditional Chains** by making decisions about which handler in the chain should process the request based on predefined conditions. The broker manages these decisions dynamically. |
+| **Fallback Chain**       | In a **Fallback Chain**, a broker can serve as the decision point when a handler fails or is unavailable, routing the request to the next handler in the fallback mechanism. |
+| **Composite Chain**      | A **Broker Chain** is useful in a **Composite Chain** for orchestrating requests across multiple sub-chains, deciding how to delegate tasks to composite elements or deciding the flow of requests across various components of the system. |
+
+The **Broker Chain** primarily introduces a **centralized control mechanism** for determining how requests should flow through the chain. It allows for **complex decision-making** and ensures that requests are routed correctly, either through multiple chains or different handlers, depending on the circumstances.
+
+#### Summary Table Comparing Pointer and Broker Chain
+
+| **Chain Type**           | **Pointer Chain**                                                                 | **Broker Chain**                                                                |
+|--------------------------|-----------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| **Single Chain**          | Handlers hold pointers to the next handler in a linear sequence.                  | A broker manages the routing of requests to handlers in the linear chain.       |
+| **Multiple Chains**       | Each chain's handlers hold pointers to the next handler in their respective chains. | The broker decides which chain to route the request to based on its characteristics. |
+| **Circular Chain**        | Handlers point to each other in a loop, forming a circular structure.            | The broker controls how the request cycles through handlers in a circular manner. |
+| **Conditional Chain**     | The flow between handlers can be dynamic, depending on conditions.                | The broker decides which handler to route the request to based on conditions.   |
+| **Fallback Chain**        | Handlers dynamically point to the next available handler if the current one fails. | The broker manages failover by routing requests to the next available handler. |
+| **Composite Chain**       | Handlers can delegate requests to sub-chains, forming a more complex structure.   | The broker orchestrates requests across sub-chains or different components.     |
+
+Both **Pointer Chains** and **Broker Chains** introduce flexibility, dynamic decision-making, and centralized control over the flow of requests, fitting naturally into the previously discussed types of Chain of Responsibility implementations.
+
 ### Command
+
+The Command design pattern is a behavioral design pattern that turns a request or action into a stand-alone object. This allows the parameterization of clients with queues, requests, and operations. Essentially, it decouples the sender of a request from the object that executes the request.
+
+#### Key Concepts (Command)
+
+- **Command**: Represents an action or request. It encapsulates all details of the request, including the method call, parameters, and the receiver.
+- **Invoker**: The object that initiates the request or command but does not need to know how the request is handled. It simply calls the execute method on the command.
+- **Receiver**: The object that performs the actual work or action when the command is executed.
+- **Client**: The object that creates and sets up the command object.
+
+#### Benefits
+
+1. **Decoupling**: The sender of the request does not need to know how the request is processed or who will execute it. It just triggers the command, and the command takes care of the rest.
+2. **Extensibility**: New commands can be added without changing existing code, as you can introduce new command objects without altering the invoker or receiver.
+3. **Undo/Redo functionality**: Command objects can be stored in a stack or a queue, allowing you to easily implement undo/redo functionality.
+4. **Composite Commands**: Multiple commands can be combined into a single command, allowing for complex actions to be executed in a simple, unified way.
+
+#### Use Cases (Command)
+
+- **Transaction management**: Where multiple actions need to be bundled together and executed in a specific order or undone if necessary.
+- **Menu systems in GUI applications**: Where commands are tied to UI elements like buttons, allowing a flexible way of invoking different actions.
+- **Macro recording**: In some applications, user actions can be recorded and replayed as a sequence of commands.
+
+In short, the Command pattern turns a simple request into an object that can be passed around, queued, logged, or even undone, offering flexibility and separation of concerns in handling requests and operations.
 
 ### Interpreter
 
