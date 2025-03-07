@@ -484,13 +484,13 @@ The **Chain of Responsibility** design pattern is a behavioral design pattern th
 
 **Chain of Responsibility** pattern defines a request-handling mechanism in which a chain of objects is given the chance to handle a request. Each object in the chain either processes the request or passes it to the next handler in the chain. This pattern decouples the sender of a request from its receivers, allowing multiple objects to process the request in a flexible and extensible manner.
 
-#### Key Characteristics:
+#### Key Characteristics (Chain of Responsibility)
 
 - **Handlers**: The objects that process or forward the request.
 - **Chain**: The sequence of handlers where each handler either processes the request or forwards it to the next handler.
 - **Decoupling**: The sender of the request is decoupled from the handler(s), promoting loose coupling.
   
-#### Benefits:
+#### Benefits
 
 - **Reduced coupling**: The sender does not need to know which handler will process the request.
 - **Flexible processing**: New handlers can be added to the chain without changing the request sender or existing handlers.
@@ -567,7 +567,7 @@ The Command design pattern is a behavioral design pattern that turns a request o
 - **Receiver**: The object that performs the actual work or action when the command is executed.
 - **Client**: The object that creates and sets up the command object.
 
-#### Benefits
+#### Benefits (Command)
 
 1. **Decoupling**: The sender of the request does not need to know how the request is processed or who will execute it. It just triggers the command, and the command takes care of the rest.
 2. **Extensibility**: New commands can be added without changing existing code, as you can introduce new command objects without altering the invoker or receiver.
@@ -584,9 +584,155 @@ In short, the Command pattern turns a simple request into an object that can be 
 
 ### Interpreter
 
+The Interpreter Design Pattern is a behavioral design pattern that provides a way to define a grammar for a language and a mechanism for interpreting sentences in that language. It involves defining an abstract representation for each element of the grammar, typically as classes, where each class implements an interpret method that evaluates or interprets the specific component of the language. This pattern allows for building a complex language structure by combining simpler expressions and enables easy extension by adding new grammar rules. The key components of the pattern typically include the abstract expression, terminal expressions, non-terminal expressions, and a context that holds information needed for interpretation.
+
+```ascii
+              +----------------+
+              |   Context      |
+              +----------------+
+                      ^
+                      |
+              +---------------+
+              |   Expression  |
+              +---------------+
+              | +interpret()  |
+              +---------------+
+                 /        \
+    +----------------+    +--------------------+
+    | TerminalExpr   |    | NonTerminalExpr    |
+    +----------------+    +--------------------+
+    | +interpret()   |    | +interpret()       |
+    +----------------+    +--------------------+
+                                   |
+                         +------------------+
+                         |  AddExpression   |
+                         +------------------+
+                         | +interpret()     |
+                         +------------------+
+```
+
 ### Iterator
 
+The **Iterator Design Pattern** is a behavioral design pattern that provides a way to sequentially access elements of a collection (like a list, array, or any other aggregate object) without exposing the underlying structure of the collection. It allows a client to traverse through the collection without needing to know its details.
+
+#### Iterator Key Concepts
+
+1. **Iterator**: This is an object that is responsible for traversing through the elements of the collection. It provides methods for accessing the next element and checking if there are more elements to iterate over.
+
+2. **Aggregate**: This is the collection that holds the elements (like a list, stack, or queue). The collection is responsible for providing an iterator that can be used to traverse its elements.
+
+3. **ConcreteIterator**: A specific implementation of the Iterator interface, this is the object that holds the state of the iteration (such as the current position in the collection).
+
+4. **ConcreteAggregate**: This is a specific collection class that implements the Aggregate interface. It creates and returns an iterator for traversing its elements.
+
+#### Iterator Structure
+
+- **Iterator Interface**: It defines the methods for accessing elements (`next()`, `hasNext()`, etc.).
+- **ConcreteIterator Class**: Implements the iterator methods for a specific collection.
+- **Aggregate Interface**: This defines the method for creating an iterator (`createIterator()`).
+- **ConcreteAggregate Class**: Implements the `createIterator()` method to return an instance of a concrete iterator.
+
+#### Advantages
+
+- **Separation of Concerns**: The iterator handles the traversal logic, while the collection can focus on storing data. This makes the code easier to maintain.
+- **Encapsulation**: The client doesn’t need to know the details of the underlying collection (like its data structure) to traverse through it.
+- **Flexibility**: Multiple iterators can be created for the same collection, allowing different ways to traverse the same data (e.g., forward, reverse, etc.).
+
+#### Iterator Use Cases
+
+- **When you want to access elements of a collection sequentially without exposing the internal structure.**
+- **When you want to support multiple traversal mechanisms.**
+- **When you want to provide a uniform interface for different types of collections.**
+
+This pattern is often used in situations where you want to separate the logic for accessing the elements of a collection from the collection itself.
+
+#### Common Iterator Examples
+
+1. **Collection Iterator**
+   **Description:**  
+   This is the most common use of the Iterator pattern, where an iterator is provided to traverse a collection (like a list, array, or set) without exposing the internal structure. The iterator allows sequential access to each element, one at a time.
+   **Use Case:**  
+   When you have a collection of objects and need a way to iterate through them without exposing the underlying details of the collection (e.g., whether it's an array, linked list, or hash set). This is useful in situations where the collection may change or when different collections may need to be iterated in the same way (e.g., `ArrayList` vs. `LinkedList`).
+2. **Reverse Iterator**
+   **Description:**  
+   A reverse iterator traverses a collection from the last element to the first. This is an extension of the basic iterator, providing the ability to access elements in reverse order.
+   **Use Case:**  
+   When you need to process a collection in reverse order, such as undoing operations in a history stack, or when displaying elements in a UI from the end to the beginning (like a playlist of songs displayed in reverse order).
+3. **Bidirectional Iterator**
+   **Description:**  
+   This iterator allows traversal in both directions, forward and backward. It's often used in doubly linked lists, where each node points to both its next and previous elements.
+   **Use Case:**  
+   This is useful in scenarios like navigating through a web browser history where the user may go back and forward between pages, or in a navigation system where elements can be traversed both ways (e.g., a playlist where users can move back and forth).
+4. **Tree Iterator**
+   **Description:**  
+   This iterator is specifically designed for traversing hierarchical structures like trees. It allows traversal in various orders (in-order, pre-order, post-order).
+   **Use Case:**  
+   When dealing with tree-like data structures (e.g., file systems, organizational hierarchies, or expression trees), you need an iterator to traverse and access nodes. It simplifies processing elements of the tree in a structured manner.
+5. **Composite Iterator**
+   **Description:**  
+   A composite iterator is used when you have a collection that contains other collections (like a collection of collections). It ensures that elements within the nested structures can be iterated over seamlessly as if they were all part of a single, flat collection.
+   **Use Case:**  
+   This is ideal in situations like processing a directory structure, where a directory may contain both files and subdirectories. You can iterate over everything without worrying about which type of object you're dealing with (file or subdirectory).
+6. **Filter Iterator**
+   **Description:**  
+   A filter iterator provides a mechanism to iterate over a collection while applying a filter criterion to select only the elements that meet a specific condition.
+   **Use Case:**  
+   When you have a large collection and you want to process only a subset based on certain conditions, such as finding all even numbers in a list or all active users in a user list. This iterator allows filtering elements without modifying the original collection.
+7. **Lazy Iterator**
+   **Description:**  
+   A lazy iterator computes elements only when they are needed, typically used in situations where elements are expensive to compute or when the collection is infinite.
+   **Use Case:**  
+   This is useful in scenarios where the entire collection is not available upfront (e.g., streaming data, large data sets, or generating sequences on the fly like Fibonacci numbers). A lazy iterator ensures that elements are only produced as needed, preventing memory overload.
+8. **Circular Iterator**
+   **Description:**  
+   A circular iterator returns to the start of the collection once it reaches the end. It loops indefinitely through the elements.
+   **Use Case:**  
+   When you need to repeat processing of the elements continuously, like in a round-robin scheduling algorithm, cyclic animation, or a rotating playlist where the music repeats once the end is reached.
+9. **Peekable Iterator**
+   **Description:**  
+   A peekable iterator allows not only iteration over elements but also the ability to "peek" at the next element without advancing the iterator. This is useful when you need to know what's coming up without consuming the element.
+   **Use Case:**  
+   Useful in scenarios like parsing or processing streams of data where the next item in the sequence is needed to make a decision but doesn't want to be consumed yet (e.g., tokenizing a stream of text or reading data files with certain rules).
+10. **Multiple Iterators**
+   **Description:**  
+   Multiple iterators allow you to have separate iterators for the same collection, enabling you to iterate over the collection in different ways simultaneously.
+   **Use Case:**  
+   This is used when multiple types of traversal are needed on the same collection, such as when you might want to access the elements both by index and by value (e.g., having both a sorted iterator and a regular iterator over a collection of objects).
+11. **Tree Iterator with Coroutines**
+  **Description:**
+  A Tree Iterator with Coroutines combines tree traversal with the use of coroutines for lazy evaluation. It allows traversal of tree structures like a standard tree iterator but can pause and resume the iteration process, yielding nodes lazily. Coroutines are used to enable more efficient memory usage and processing.
+  **Use Case:**
+  When working with large hierarchical structures (like trees or graphs) where you want to pause the iteration and process other tasks, resuming from the last position. It's especially useful for deep tree structures where loading each part of the tree or node dynamically makes sense, like a database traversal or parsing large XML/JSON documents in chunks.
+
 ### Mediator
+
+The **Mediator** design pattern is a behavioral design pattern that promotes loose coupling in a system by centralizing communication between objects. Instead of having objects communicate directly with one another, they communicate through a mediator object. This way, the mediator handles all interactions, which helps to reduce the complexity and dependencies between the objects.
+
+#### Key Points of the Mediator Pattern
+
+1. **Centralized Communication**: The mediator acts as a central point of contact for all communication between components. Rather than objects directly interacting with one another, they send their messages to the mediator.
+2. **Decoupling**: By relying on a mediator to manage communication, objects are decoupled from each other. This makes it easier to modify, extend, or maintain the system, as changes to one object won’t affect others directly.
+3. **Simplifies Complex Interactions**: In systems with many objects interacting with each other, the mediator pattern reduces the number of connections that need to be managed. Without it, the interactions between objects might form a complex web of dependencies. The mediator helps simplify this by reducing the direct dependencies.
+4. **Coordination of Components**: The mediator can coordinate the actions of various components, ensuring that the right sequence of actions occurs or that only the necessary components are involved in a particular interaction.
+
+#### Use Cases for the Mediator Pattern
+
+- **GUI Systems**: In graphical user interfaces (GUIs), there may be multiple elements (buttons, text fields, checkboxes, etc.) that need to communicate with each other. Instead of each element interacting directly, a mediator (such as a controller) can manage the interactions.  
+- **Chat Applications**: In a chat system, users might send messages to each other, but rather than each user directly messaging others, a chat room or server can act as a mediator to manage the message flow.
+- **Workflow Management**: In systems where different steps or components need to be orchestrated in a specific order, a mediator can handle the coordination of those steps.
+
+#### Benefits (Mediator)
+
+- **Reduced Complexity**: Since objects don’t need to know about each other, the system becomes easier to understand and modify.  
+- **Better Maintainability**: Changes to one object are less likely to affect others since they don’t have direct interactions.
+- **Improved Flexibility**: New components can be added to the system with minimal impact on existing components because the mediator handles all communication.
+
+#### Drawbacks (Mediator)
+
+- **Mediator Complexity**: If the mediator itself becomes too complex or handles too many responsibilities, it can become a bottleneck in the system.
+- **Overhead**: The mediator adds another layer of abstraction and can introduce overhead if it’s not used appropriately.
+
+In summary, the Mediator pattern helps manage communication between a group of objects by centralizing it in a mediator, simplifying the interactions and improving the maintainability and flexibility of the system.
 
 ### Memento
 
@@ -601,4 +747,4 @@ In short, the Command pattern turns a simple request into an object that can be 
 ### Visitor
 
 ---
-chain of responsibility (pointer chain, broker chain), Command, Interpreter (Lexing, Parsing), Iterator (Binary Tree Iterator, Tree Iterator with coroutines), Mediator, Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
