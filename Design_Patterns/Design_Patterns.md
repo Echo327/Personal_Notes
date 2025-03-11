@@ -736,7 +736,55 @@ In summary, the Mediator pattern helps manage communication between a group of o
 
 ### Memento
 
+The **Memento design pattern** is a behavioral design pattern that allows an object to capture and externalize its internal state without violating encapsulation. This captured state can later be restored, allowing the object to return to that saved state at a later time. 
+
+#### Key Concepts (Memento)
+
+1. **Originator**: The object whose state is being saved or restored. It can create and restore a memento object that holds its internal state.
+2. **Memento**: A snapshot of the Originator's internal state. It doesn't expose any details about the state, ensuring encapsulation. The Memento only stores the state and doesn't alter it.
+3. **Caretaker**: This component is responsible for managing the mementos. It keeps track of multiple mementos (often in a list or stack) but doesn't alter their content or manage their state directly. It can request the Originator to save or restore its state using a memento.
+
+#### How It Works
+
+- **Saving State**: When the state of an object (Originator) needs to be saved, it creates a memento object that holds the current state. This memento is then passed to the Caretaker for storage.  
+- **Restoring State**: At a later time, the Caretaker can request the Originator to restore its state from the memento, effectively reverting the object to its prior condition.
+
+#### Advantages (Memento)
+
+- **Preserves encapsulation**: The internal details of the object’s state are hidden in the memento, ensuring that the object's internal implementation remains protected.  
+- **Undo/Redo functionality**: The Memento pattern is useful in scenarios where undo/redo functionality is needed, such as in text editors or games.
+
+#### Use Cases (Memento)
+
+- Implementing undo/redo mechanisms in software applications.
+- Saving checkpoints in a game or long-running process.
+- Storing the history of an object’s state in systems like databases or version control.
+
+In essence, the Memento pattern helps in separating the responsibility of saving and restoring the state from the object itself, while keeping the object’s internal structure hidden and protected.
+
 ### Observer
+
+The **Observer Design Pattern** is a behavioral design pattern used to establish a one-to-many relationship between objects. In this pattern, a **subject** (also called the "observable") maintains a list of its dependents, known as **observers**, and notifies them automatically of any changes in its state.
+
+#### Key Concepts (Observer)
+
+1. **Subject**: The object that holds the state and notifies its observers of any changes. It is responsible for maintaining the list of observers and updating them when its state changes.
+2. **Observers**: These are the objects that are dependent on the state of the subject. They need to be notified whenever there is a change in the subject’s state. Each observer registers with the subject to receive notifications.
+3. **Notification Mechanism**: When the state of the subject changes, it triggers a notification to all registered observers, ensuring they are updated with the new state.
+
+#### Benefits (Observer)
+
+- **Loose Coupling**: The subject and observers are loosely coupled because the subject doesn't need to know the details about the observers; it just sends notifications. Likewise, observers don't need to know how the subject is implemented.  
+- **Dynamic Relationship**: Observers can be added or removed from the subject at runtime, which makes the system flexible and adaptable to changes.
+- **Decouples Responsibility**: The responsibility for maintaining consistency between different parts of the system is shared between the subject and the observers.
+
+#### Use Cases (Observer)
+
+- **Event Handling Systems**: Where one event triggers multiple reactions.
+- **User Interface (UI) Components**: A model-view pattern where the model (subject) notifies the view (observer) when data changes.
+- **Real-Time Data Monitoring**: Stock prices, weather systems, or sensors that update their data to subscribers.
+
+The observer pattern is most useful when you want to ensure that multiple objects are updated automatically in response to changes in a central object without tightly coupling the components together.
 
 ### State
 
@@ -747,4 +795,4 @@ In summary, the Mediator pattern helps manage communication between a group of o
 ### Visitor
 
 ---
-Memento, Observer, State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
