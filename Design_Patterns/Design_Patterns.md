@@ -654,7 +654,7 @@ This pattern is often used in situations where you want to separate the logic fo
    **Use Case:**  
    When you have a collection of objects and need a way to iterate through them without exposing the underlying details of the collection (e.g., whether it's an array, linked list, or hash set). This is useful in situations where the collection may change or when different collections may need to be iterated in the same way (e.g., `ArrayList` vs. `LinkedList`).
 2. **Reverse Iterator**
-   **Description:**  
+   **Description:**
    A reverse iterator traverses a collection from the last element to the first. This is an extension of the basic iterator, providing the ability to access elements in reverse order.
    **Use Case:**  
    When you need to process a collection in reverse order, such as undoing operations in a history stack, or when displaying elements in a UI from the end to the beginning (like a playlist of songs displayed in reverse order).
@@ -788,6 +788,29 @@ The observer pattern is most useful when you want to ensure that multiple object
 
 ### State
 
+The state machine design pattern is a behavioral design pattern that allows an object to change its behavior when its internal state changes. This pattern is useful for modeling complex systems where an object can be in one of several states, each with distinct behaviors and transitions.
+
+### Key Concepts (State Machine)
+
+1. **States**: Represents the various conditions or modes in which an object can exist. Each state defines specific behaviors and responses to events.
+2. **Transitions**: The rules that determine how an object moves from one state to another. Transitions are often triggered by events or conditions.
+3. **Context**: The object that maintains the current state and delegates behavior to the active state. It encapsulates the state machine and manages state transitions.
+4. **Events**: Actions or occurrences that can trigger state transitions. Events can originate from user interactions, system inputs, or internal conditions.
+
+### Benefits (State Machine)
+
+- **Separation of Concerns**: Each state encapsulates its behavior, making the code easier to understand and maintain.
+- **Scalability**: New states can be added with minimal impact on existing code.
+- **Clarity**: The flow of state transitions makes the logic of state-dependent behaviors explicit.
+
+### Use Cases (State Machine)
+
+- User interface elements (e.g., buttons that change states based on user interactions).
+- Workflow systems (e.g., order processing that varies depending on the order status).
+- Protocols (e.g., network communication states).
+
+In summary, the state machine design pattern provides a structured approach to managing state-dependent behavior, enhancing the clarity and maintainability of complex systems.
+
 ### Strategy
 
 ### Template
@@ -795,4 +818,4 @@ The observer pattern is most useful when you want to ensure that multiple object
 ### Visitor
 
 ---
-State, Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
