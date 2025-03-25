@@ -813,9 +813,51 @@ In summary, the state machine design pattern provides a structured approach to m
 
 ### Strategy
 
+The Strategy Design Pattern is a behavioral design pattern that enables selecting an algorithm's behavior at runtime. It defines a family of algorithms, encapsulates each one, and makes them interchangeable. This pattern allows the client to choose which algorithm to use, promoting flexibility and reusability in code.
+
+Key components of the Strategy Pattern include:
+
+1. **Context**: This class maintains a reference to one of the strategy objects and can switch between different strategies based on the needs of the application.
+
+2. **Strategy Interface**: This defines a common interface for all supported algorithms, allowing the context to interact with them uniformly.
+
+3. **Concrete Strategies**: These are specific implementations of the strategy interface. Each concrete strategy encapsulates a different algorithm or behavior.
+
+By using the Strategy Pattern, you can avoid conditional statements to select behaviors and instead leverage polymorphism to make the code more manageable and scalable. This pattern is especially useful when there are multiple ways to perform a particular operation, and you want to allow the behavior to vary independently from the clients that use it.
+
+Comparison of **Static Strategy** and **Dynamic Strategy**:
+
+| **Aspect**              | **Static Strategy**                                | **Dynamic Strategy**                                  |
+|-------------------------|---------------------------------------------------|------------------------------------------------------|
+| **Selection Time**       | Selected at compile-time                         | Selected at runtime                                  |
+| **Flexibility**          | Less flexible; cannot be changed without code modification | More flexible; can be changed dynamically at runtime |
+| **Adaptability**         | Fixed strategy for the entire application        | Can adapt to different conditions during execution    |
+| **Performance**          | Potentially more efficient as the strategy is fixed | Slight overhead due to runtime strategy selection    |
+| **Code Modification**    | Requires code changes and recompilation to change | No code changes needed to switch strategies          |
+| **Use Case Example**     | Using a single sorting algorithm throughout the application | Allowing users to choose between multiple sorting algorithms |
+| **Complexity**           | Simpler to implement and understand               | More complex, requires infrastructure for runtime decision-making |
+
 ### Template
+
+The **Template Method Design Pattern** is a behavioral design pattern that defines the structure of an algorithm in a method, deferring some steps to subclasses. This allows subclasses to redefine certain steps of the algorithm without changing its overall structure. 
+
+### Key Characteristics (Template)
+
+- **Template Method**: The main method in the class defines the skeleton of the algorithm. It consists of a series of steps, some of which may be implemented by the base class, while others are abstract (to be implemented by subclasses).
+- **Hook Methods**: These are optional methods that can be overridden by subclasses. They provide flexibility for customization.
+- **Invariant Steps**: These are steps in the algorithm that remain constant and are typically implemented in the base class, ensuring the basic structure of the algorithm is followed.
+
+### Advantages (Template)
+
+- Promotes **code reuse** by factoring out common parts of the algorithm.
+- **Encourages consistency** in how algorithms are executed across different subclasses, ensuring they all follow the same high-level steps.
+- Provides a clear and maintainable way to **extend** an algorithm without altering its core logic.
+
+In short, the Template Method pattern helps to centralize the shared parts of an algorithm in a superclass while allowing flexibility for subclasses to implement parts of the algorithm that can vary.
 
 ### Visitor
 
+
+
 ---
-Strategy (Dynamic Strategy, Static Strategy), Template, Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
