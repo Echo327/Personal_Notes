@@ -736,7 +736,7 @@ In summary, the Mediator pattern helps manage communication between a group of o
 
 ### Memento
 
-The **Memento design pattern** is a behavioral design pattern that allows an object to capture and externalize its internal state without violating encapsulation. This captured state can later be restored, allowing the object to return to that saved state at a later time. 
+The **Memento design pattern** is a behavioral design pattern that allows an object to capture and externalize its internal state without violating encapsulation. This captured state can later be restored, allowing the object to return to that saved state at a later time.
 
 #### Key Concepts (Memento)
 
@@ -785,6 +785,10 @@ The **Observer Design Pattern** is a behavioral design pattern used to establish
 - **Real-Time Data Monitoring**: Stock prices, weather systems, or sensors that update their data to subscribers.
 
 The observer pattern is most useful when you want to ensure that multiple objects are updated automatically in response to changes in a central object without tightly coupling the components together.
+
+(also look at Observer - Terminology
+event and subscriber
+signal and slot)
 
 ### State
 
@@ -839,7 +843,7 @@ Comparison of **Static Strategy** and **Dynamic Strategy**:
 
 ### Template
 
-The **Template Method Design Pattern** is a behavioral design pattern that defines the structure of an algorithm in a method, deferring some steps to subclasses. This allows subclasses to redefine certain steps of the algorithm without changing its overall structure. 
+The **Template Method Design Pattern** is a behavioral design pattern that defines the structure of an algorithm in a method, deferring some steps to subclasses. This allows subclasses to redefine certain steps of the algorithm without changing its overall structure.
 
 ### Key Characteristics (Template)
 
@@ -857,7 +861,66 @@ In short, the Template Method pattern helps to centralize the shared parts of an
 
 ### Visitor
 
+The **Visitor** design pattern is a behavioral pattern that allows you to add further operations to objects without having to modify them. It lets you separate an algorithm from the objects it operates on, which is useful when you need to perform a set of operations on a structure of objects, and the operations may change over time.
 
+### Key Concepts (Visitor)
 
----
-Visitor (Intrusive, Reflective, Classic Visitor (double dispatch?), Acyclic visitor, multimethods)
+1. **Visitor Interface**: This defines a visit method for each type of element in the structure of objects.
+2. **Concrete Visitor**: A class that implements the visitor interface and defines the operations to be performed on the elements.
+3. **Element Interface**: Each element in the structure implements an accept method, which takes a visitor as a parameter.
+4. **Concrete Element**: A class that implements the element interface and accepts visitors to perform the operations defined by the visitor.
+
+### How It Works (Visitor)
+
+- The Visitor pattern allows you to define new operations (visits) on an object structure without changing the classes of the objects in the structure.
+- Instead of having the operations spread across multiple classes of the object structure, you define them in one or more visitor classes.
+- When a visitor comes to visit an object, the object will "accept" the visitor and delegate the operation to the visitor class.
+
+### Use Cases (Visitor)
+
+- **When new operations are frequently added**: If you have an object structure that is unlikely to change, but you often need to add new operations on that structure, the Visitor pattern is a good solution. It allows adding operations without changing the object structure itself.
+- **Complex object hierarchies**: The pattern is particularly useful in cases where the object structure is complex and operations need to be applied to various combinations of those objects.
+
+### Advantages (Visitor)
+
+- **Separation of concerns**: The pattern separates operations from the objects they operate on.
+- **Extensibility**: It’s easy to add new operations by adding new visitors without modifying the existing classes.
+- **Improved maintenance**: Adding or modifying operations becomes easier as the operations are confined to visitors, not scattered across the object structure.
+
+### Disadvantages (Visitor)
+
+- **Complexity**: The pattern can increase the complexity of the system, especially if the object structure is very large and involves many different types of visitors.
+- **Harder to maintain for changes in the object structure**: If the object structure changes (e.g., adding new types of elements), you will need to modify the visitor interface and all its concrete visitors, which can be cumbersome.
+
+In essence, the Visitor pattern is about keeping operations centralized and allowing them to evolve without changing the core object structure.
+
+### Types of Visitor
+
+The **Visitor design pattern** itself is typically classified into two main types, which are based on how the visitor is implemented and how it interacts with the object structure. These types can differ in the complexity of their design and usage:
+
+#### 1. **Single Dispatch Visitor**
+
+- **Description**: This is the more common type of Visitor pattern where a **single dispatch** is used to determine the appropriate visitor operation based on the type of the element it is visiting.
+- **How it works**: The `accept` method in the element interface is implemented such that it dispatches the visitor to the corresponding `visit` method based on the element's type. This is the simplest form of the Visitor pattern, where each element knows which method of the visitor to call.
+- **Example**: If you have a `Book` and `Magazine` class, each class would implement an `accept` method that calls the visitor’s `visitBook` or `visitMagazine` method, depending on the type of the element being visited.
+
+#### 2. **Double Dispatch Visitor**
+
+- **Description**: This is a more advanced form of the Visitor pattern, involving **double dispatch** to ensure the correct method is called on both the visitor and the element.
+- **How it works**: The main idea of double dispatch is that the visitor’s `visit` method is not just dispatched based on the element type, but the element itself also dispatches its specific method on the visitor. This means the visitor calls the `accept` method of the element, and then the element calls a specific method on the visitor, ensuring that both the visitor and element’s types are taken into account.
+- **Example**: If you have a `Book` and `Magazine` class, each element would implement an `accept` method that knows which visitor method to call, and the visitor method would be able to execute operations based on both the element and the visitor. This allows for more flexibility and complexity in handling various combinations of operations.
+
+#### Summary
+
+- **Single Dispatch Visitor**: A simpler implementation where the operation is dispatched to the correct method on the visitor based on the element’s type.
+- **Double Dispatch Visitor**: A more complex version where both the element and the visitor play a role in determining which method is executed, allowing for greater flexibility when adding new types of operations or elements.
+
+Both approaches leverage the core idea of the **Visitor** pattern—separating the operation from the object structure—but vary in how they manage the interaction between visitors and elements. Double dispatch is typically preferred in more complex systems where you need to handle more sophisticated scenarios or multiple types of visitors.
+
+#### Variations of Visitor
+
+- Intrusive Visitor: Requires the element classes to be aware of the visitor, which reduces flexibility but is easy to implement.
+- Reflective Visitor: Uses reflection to dynamically select methods at runtime, allowing for greater flexibility without requiring changes to element classes.
+- Classic Visitor (Double Dispatch): Uses double dispatch to select the appropriate method based on both the visitor and element types. It is the standard implementation of the pattern.
+- Acyclic Visitor: Avoids the circular dependency between visitors and elements, making the pattern more flexible by decoupling them.
+- Multimethods: Extends the visitor pattern by dispatching based on the types of multiple objects, providing more flexibility for operations involving multiple types of objects.
