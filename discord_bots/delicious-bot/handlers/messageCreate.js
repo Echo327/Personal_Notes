@@ -39,6 +39,7 @@ module.exports = {
                 case "!morehelp":
                     message.reply(
                         "Help (with Description)\n\
+                        !mode : Shows current bot mode.\n\
                         !serverage : How old this server is.\n\
                         !userage : How long since you've been on this server.\n\
                         !janken : Rock, Paper, Scissors.\n\
@@ -82,7 +83,13 @@ module.exports = {
                         message.reply("muahahahaha");
                     }
                     break;
+                case "!mode":
+                    message.reply("Current mode is \""+mode+"\"");
+                    break;
                 case "!janken":
+                    // To-Do : Keep janken game open when changing mode
+                    // from janken to polls or other modes (it currently resets)
+                    // or add a warning about data loss and prevent mode switching
                     if (mode == "janken"){
                         message.reply("Another game is already in progress.")
                         break;
