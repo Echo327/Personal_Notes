@@ -1,4 +1,5 @@
 const { processMove, SaveGameData, ReadGameData } = require("./janken");
+const { pollActive, pollHistory, pollInfo, pollVote, pollCreate, pollClose } = require("./polls");
 
 module.exports = {
     processMessage: function(DateTime, command_prefix, message){
@@ -28,19 +29,21 @@ module.exports = {
             switch(userMessage){
                 case "!help":
                     // Displays general help documentation
-                    message.reply("I am here to help!\n \
-                    Available commands: !help !morehelp !toggleannoying\n \
-                    !serverage !userage\n \
-                    !janken\n \
-                    (in progress) !poll \n\n \
-                    Current mode: "+mode);
+                    message.reply("I am here to help! Available commands:\n\
+                    !help !morehelp\n\
+                    !janken !polls\n \
+                    Bonus: !mode !serverage !userage !toggleannoying\n\
+                    Current mode: "+mode
+                    );
                     break;
                 case "!morehelp":
                     message.reply(
                         "Help (with Description)\n\
                         !serverage : How old this server is.\n\
                         !userage : How long since you've been on this server.\n\
-                        !janken : Rock, Paper, Scissors."
+                        !janken : Rock, Paper, Scissors.\n\
+                        !polls : polls polls polls\n\
+                        Current mode: "+mode
                     );
                     break;
                 case "!serverage":
@@ -98,6 +101,25 @@ module.exports = {
                         Type \"**end**\" to stop the current game and save results.\n \
                         Type \"**ragequit**\" to quit without saving")
                     break;
+                case "!polls":
+                    if (mode == "polls"){
+                        // To-Do : Add annoying replies for polls
+                        if(annoying){
+                            message.reply("Bro, already in polls, bro")
+                        }
+                        else {
+                            message.reply("Already in polls mode.")
+                        }
+                        break;
+                    }
+                    mode = "polls";
+                    message.reply("Welcome to Polls mode. Available options are:\n\
+                        polls\nhistory\n\
+                        poll <id>\n\
+                        vote <id> <option>\n\
+                        create <title>\n\
+                        close <id>")
+                    break;
                 default:
                     if (annoying){ message.reply("You don't make sense, jackass.")}
                     else{
@@ -146,6 +168,53 @@ module.exports = {
                     // message.reply("Janken move not recognised.")
             }
         }
+        else if (mode == "polls"){
+            let uM = userMessage.split(" ");
+            switch(uM[0]){
+                case "polls":
+                    // lists all open polls
+                    pollActive(message);
+                    break;
+                case "history":
+                    // lists all closed polls
+                    pollHistory(message);
+                    break;
+                case "poll":
+                    // poll <id>
+                    // provides data on specific poll
+                    pollInfo(message, uM[1]);
+                    break;
+                case "vote":
+                    // vote <Yes|No>
+                    // To-Do : Allow custom votes options
+                    // To-Do : Add Support for Multi Word votes
+                    // To-Do : Support vote by vote_id
+                    pollVote(message, uM[1], uM[2]);
+                    break;
+                case "create":
+                    // create <question>
+                    if (uM.length <= 1)
+                    {
+                        message.reply("Title for poll needs to be provided.")
+                    }
+                    else
+                    {
+                        pollCreate(uM, message);
+                    }
+                    break;
+                case "close":
+                    //close <id>
+                    pollClose(message, uM[1]);
+                    break;
+                case "exit":
+                    mode = "command";
+                    message.reply("Exiting poll mode.")
+                    break;
+                default:
+                    // allows regular messages
+                    break;
+            }
+        }    
         else{
             // reply to non-bot message
             if (annoying){ message.reply("Hello human! You're the best!! I love you!!! <3"); }
