@@ -5,12 +5,15 @@ const msgCreateHandler = require('./handlers/messageCreate')
 // To-Do: add robustness to path variables
 // global.rootdir = process.cwd();
 
+// To-Do: Discord Bot Template
+
 const bot_id = require("../private/delicious_bot.json"); // delicious-bot configuration
 
 // variables
 const command_prefix = "!";     // will only process commands with this prefix
 global.annoying = false;
 global.mode = "command";
+// To-Do : Persistence of ID after bot reboot
 global.janken_data = {
     game_id : 0,
     nb_draw : 0,
@@ -19,6 +22,9 @@ global.janken_data = {
     player : "",    // current player
     server: ""  // current server
 }
+// To-Do : idea for specific cases
+// maybe a boolean + which service is waiting for user input to jump to service using router
+// global.waiting_user_input = false;
 
 // Main hub for interacting with Discord API
 // Intents : which events bots receives
@@ -44,8 +50,14 @@ const Delicious = new Discord.Client({
 Delicious.on("ready", (client) => {
     console.log(client.user.tag, "has arrived. This server is now delicious!");
 
-    // Bot Status
+    // Bot Status - Regular
     Delicious.user.setActivity("!help", {type: Discord.ActivityType.Watching});
+    
+    // Bot Status - In Debug/Maintenance
+    // Delicious.user.setPresence({
+    //     activities: [{ name: "Maintenance" }],
+    //     status: Discord.PresenceUpdateStatus.DoNotDisturb
+    // });
 });
 
 // When a message is created/posted

@@ -28,19 +28,22 @@ module.exports = {
             switch(userMessage){
                 case "!help":
                     // Displays general help documentation
-                    message.reply("I am here to help!\n \
-                    Available commands: !help !morehelp !toggleannoying\n \
-                    !serverage !userage\n \
+                    message.reply("I am here to help! Available commands:\n\
+                    !help !morehelp\n\
                     !janken\n \
                     (in progress) !poll \n\n \
-                    Current mode: "+mode);
+                    Bonus: !mode !serverage !userage !toggleannoying\n\
+                    Current mode: "+mode
+                    );
                     break;
                 case "!morehelp":
                     message.reply(
                         "Help (with Description)\n\
+                        !mode : Shows current bot mode.\n\
                         !serverage : How old this server is.\n\
                         !userage : How long since you've been on this server.\n\
-                        !janken : Rock, Paper, Scissors."
+                        !janken : Rock, Paper, Scissors.\n\
+                        Current mode: "+mode
                     );
                     break;
                 case "!serverage":
@@ -79,7 +82,13 @@ module.exports = {
                         message.reply("muahahahaha");
                     }
                     break;
+                case "!mode":
+                    message.reply("Current mode is \""+mode+"\"");
+                    break;
                 case "!janken":
+                    // To-Do : Keep janken game open when changing mode
+                    // from janken to polls or other modes (it currently resets)
+                    // or add a warning about data loss and prevent mode switching
                     if (mode == "janken"){
                         message.reply("Another game is already in progress.")
                         break;
